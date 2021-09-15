@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "690076633689",
+    "project_id": "teachers-assistant-d96f2",
+    "storage_bucket": "teachers-assistant-d96f2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:690076633689:android:d938959ff1f0c770fbbf48",
+        "android_client_info": {
+          "package_name": "com.example.teachersassistant"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "690076633689-sst1gcio7fbhj61nlmk31joanibq7jnp.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.teachersassistant",
+            "certificate_hash": "9fca0be02e60e1a25f31523115d19a200945684f"
+          }
+        },
+        {
+          "client_id": "690076633689-c7knfulf0t328njb71b0fkciuc0geflq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAn4UYFexsz6EUYOWT9x_lkArwtmq7aAmM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "690076633689-c7knfulf0t328njb71b0fkciuc0geflq.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
