@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Teachers Assistant</string>
+    <string name="welcome">Welcome to AcaDroid</string>
+    <string name="hi">Hello Everyone!</string>
+    <string name="copy">© 2020 - AcaDroid Inc.</string>
+    <string name="authenticate">Authenticate</string>
 </resources>
