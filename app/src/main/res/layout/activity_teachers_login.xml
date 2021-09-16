@@ -54,6 +54,7 @@
         android:orientation="vertical">
 
         <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/teacherIdLay"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:hintAnimationEnabled="true"
@@ -67,7 +68,8 @@
                 android:id="@+id/teacherId"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Enter Teacher ID"/>
+                android:hint="Enter Teacher ID"
+                android:text="admin"/>
 
         </com.google.android.material.textfield.TextInputLayout>
 
