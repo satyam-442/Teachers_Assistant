@@ -1,0 +1,560 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:layout_margin="40dp">
+
+        <TableRow
+            android:background="@color/purple_500">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textColor="@color/purple_700"
+                android:textSize="17sp"
+                android:padding="8sp"
+                android:gravity="center_horizontal"
+                android:text="Class"/>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textColor="@color/purple_700"
+                android:textSize="17sp"
+                android:padding="8sp"
+                android:gravity="center_horizontal"
+                android:text="Grade"/>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="3"
+                android:textColor="@color/purple_700"
+                android:textSize="17sp"
+                android:padding="8sp"
+                android:gravity="center_horizontal"
+                android:text="Teacher Name"/>
+        </TableRow>
+
+        <TableRow
+            android:background="@color/purple_200">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textColor="@color/purple_700"
+                android:textSize="17sp"
+                android:padding="8sp"
+                android:gravity="center_horizontal"
+                android:text="1"/>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textColor="@color/purple_700"
+                android:textSize="17sp"
+                android:padding="8sp"
+                android:gravity="center_horizontal"
+                android:text="A"/>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="3"
+                android:textColor="@color/purple_700"
+                android:textSize="17sp"
+                android:padding="8sp"
+                android:gravity="center_horizontal"
+                android:text="Mr. Jonathan"/>
+        </TableRow>
+
+        <TableRow
+            android:background="@color/purple_200">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textColor="@color/purple_700"
+                android:textSize="17sp"
+                android:padding="8sp"
+                android:gravity="center_horizontal"
+                android:text="1"/>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textColor="@color/purple_700"
+                android:textSize="17sp"
+                android:padding="8sp"
+                android:gravity="center_horizontal"
+                android:text="B"/>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="3"
+                android:textColor="@color/purple_700"
+                android:textSize="17sp"
+                android:padding="8sp"
+                android:gravity="center_horizontal"
+                android:text="Mrs. Marrie"/>
+        </TableRow>
+
+        <TableRow
+            android:background="@color/purple_200">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textColor="@color/purple_700"
+                android:textSize="17sp"
+                android:padding="8sp"
+                android:gravity="center_horizontal"
+                android:text="1"/>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textColor="@color/purple_700"
+                android:textSize="17sp"
+                android:padding="8sp"
+                android:gravity="center_horizontal"
+                android:text="C"/>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="3"
+                android:textColor="@color/purple_700"
+                android:textSize="17sp"
+                android:padding="8sp"
+                android:gravity="center_horizontal"
+                android:text="Mr. Margurite Girard"/>
+        </TableRow>
+
+        <TableRow
+            android:background="@color/purple_200">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textColor="@color/purple_700"
+                android:textSize="17sp"
+                android:padding="8sp"
+                android:gravity="center_horizontal"
+                android:text="2"/>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textColor="@color/purple_700"
+                android:textSize="17sp"
+                android:padding="8sp"
+                android:gravity="center_horizontal"
+                android:text="A"/>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="3"
+                android:textColor="@color/purple_700"
+                android:textSize="17sp"
+                android:padding="8sp"
+                android:gravity="center_horizontal"
+                android:text="Mrs. Tracy Shrader"/>
+        </TableRow>
+
+        <TableRow
+            android:background="@color/purple_200">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textColor="@color/purple_700"
+                android:textSize="17sp"
+                android:padding="8sp"
+                android:gravity="center_horizontal"
+                android:text="2"/>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textColor="@color/purple_700"
+                android:textSize="17sp"
+                android:padding="8sp"
+                android:gravity="center_horizontal"
+                android:text="B"/>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="3"
+                android:textColor="@color/purple_700"
+                android:textSize="17sp"
+                android:padding="8sp"
+                android:gravity="center_horizontal"
+                android:text="Mr. Ermelinda Shevlin"/>
+        </TableRow>
+
+        <TableRow
+            android:background="@color/purple_200">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textColor="@color/purple_700"
+                android:textSize="17sp"
+                android:padding="8sp"
+                android:gravity="center_horizontal"
+                android:text="2"/>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textColor="@color/purple_700"
+                android:textSize="17sp"
+                android:padding="8sp"
+                android:gravity="center_horizontal"
+                android:text="C"/>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="3"
+                android:textColor="@color/purple_700"
+                android:textSize="17sp"
+                android:padding="8sp"
+                android:gravity="center_horizontal"
+                android:text="Mrs. Federico Brayton"/>
+        </TableRow>
+
+        <TableRow
+            android:background="@color/purple_200">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textColor="@color/purple_700"
+                android:textSize="17sp"
+                android:padding="8sp"
+                android:gravity="center_horizontal"
+                android:text="3"/>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textColor="@color/purple_700"
+                android:textSize="17sp"
+                android:padding="8sp"
+                android:gravity="center_horizontal"
+                android:text="A"/>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="3"
+                android:textColor="@color/purple_700"
+                android:textSize="17sp"
+                android:padding="8sp"
+                android:gravity="center_horizontal"
+                android:text="Mr. Latisha Pearse"/>
+        </TableRow>
+
+        <TableRow
+            android:background="@color/purple_200">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textColor="@color/purple_700"
+                android:textSize="17sp"
+                android:padding="8sp"
+                android:gravity="center_horizontal"
+                android:text="3"/>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textColor="@color/purple_700"
+                android:textSize="17sp"
+                android:padding="8sp"
+                android:gravity="center_horizontal"
+                android:text="B"/>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="3"
+                android:textColor="@color/purple_700"
+                android:textSize="17sp"
+                android:padding="8sp"
+                android:gravity="center_horizontal"
+                android:text="Mrs. Denise Remus"/>
+        </TableRow>
+
+        <TableRow
+            android:background="@color/purple_200">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textColor="@color/purple_700"
+                android:textSize="17sp"
+                android:padding="8sp"
+                android:gravity="center_horizontal"
+                android:text="3"/>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textColor="@color/purple_700"
+                android:textSize="17sp"
+                android:padding="8sp"
+                android:gravity="center_horizontal"
+                android:text="C"/>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="3"
+                android:textColor="@color/purple_700"
+                android:textSize="17sp"
+                android:padding="8sp"
+                android:gravity="center_horizontal"
+                android:text="Mr. Tracie Searle"/>
+        </TableRow>
+
+        <TableRow
+            android:background="@color/purple_200">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textColor="@color/purple_700"
+                android:textSize="17sp"
+                android:padding="8sp"
+                android:gravity="center_horizontal"
+                android:text="4"/>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textColor="@color/purple_700"
+                android:textSize="17sp"
+                android:padding="8sp"
+                android:gravity="center_horizontal"
+                android:text="A"/>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="3"
+                android:textColor="@color/purple_700"
+                android:textSize="17sp"
+                android:padding="8sp"
+                android:gravity="center_horizontal"
+                android:text="Mrs. Werner Poppe"/>
+        </TableRow>
+
+        <TableRow
+            android:background="@color/purple_200">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textColor="@color/purple_700"
+                android:textSize="17sp"
+                android:padding="8sp"
+                android:gravity="center_horizontal"
+                android:text="4"/>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textColor="@color/purple_700"
+                android:textSize="17sp"
+                android:padding="8sp"
+                android:gravity="center_horizontal"
+                android:text="B"/>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="3"
+                android:textColor="@color/purple_700"
+                android:textSize="17sp"
+                android:padding="8sp"
+                android:gravity="center_horizontal"
+                android:text="Mr. Sandi Endsley"/>
+        </TableRow>
+
+        <TableRow
+            android:background="@color/purple_200">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textColor="@color/purple_700"
+                android:textSize="17sp"
+                android:padding="8sp"
+                android:gravity="center_horizontal"
+                android:text="4"/>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textColor="@color/purple_700"
+                android:textSize="17sp"
+                android:padding="8sp"
+                android:gravity="center_horizontal"
+                android:text="C"/>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="3"
+                android:textColor="@color/purple_700"
+                android:textSize="17sp"
+                android:padding="8sp"
+                android:gravity="center_horizontal"
+                android:text="Mrs. Penelope Raasch"/>
+        </TableRow>
+
+        <TableRow
+            android:background="@color/purple_200">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textColor="@color/purple_700"
+                android:textSize="17sp"
+                android:padding="8sp"
+                android:gravity="center_horizontal"
+                android:text="5"/>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textColor="@color/purple_700"
+                android:textSize="17sp"
+                android:padding="8sp"
+                android:gravity="center_horizontal"
+                android:text="A"/>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="3"
+                android:textColor="@color/purple_700"
+                android:textSize="17sp"
+                android:padding="8sp"
+                android:gravity="center_horizontal"
+                android:text="Mrs. Suzi Greenland"/>
+        </TableRow>
+
+        <TableRow
+            android:background="@color/purple_200">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textColor="@color/purple_700"
+                android:textSize="17sp"
+                android:padding="8sp"
+                android:gravity="center_horizontal"
+                android:text="5"/>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textColor="@color/purple_700"
+                android:textSize="17sp"
+                android:padding="8sp"
+                android:gravity="center_horizontal"
+                android:text="B"/>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="3"
+                android:textColor="@color/purple_700"
+                android:textSize="17sp"
+                android:padding="8sp"
+                android:gravity="center_horizontal"
+                android:text="Mr. Ermelinda Shevlin"/>
+        </TableRow>
+
+        <TableRow
+            android:background="@color/purple_200">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textColor="@color/purple_700"
+                android:textSize="17sp"
+                android:padding="8sp"
+                android:gravity="center_horizontal"
+                android:text="5"/>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textColor="@color/purple_700"
+                android:textSize="17sp"
+                android:padding="8sp"
+                android:gravity="center_horizontal"
+                android:text="C"/>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="3"
+                android:textColor="@color/purple_700"
+                android:textSize="17sp"
+                android:padding="8sp"
+                android:gravity="center_horizontal"
+                android:text="Mr. Tracie Searle"/>
+        </TableRow>
+
+    </TableLayout>
+
+</LinearLayout>

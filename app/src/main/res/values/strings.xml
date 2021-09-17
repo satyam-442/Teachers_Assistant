@@ -7,4 +7,36 @@
     <string name="authenticate">Authenticate</string>
     <string name="addTeacher">Add Teacher</string>
     <string name="success_auth_message">Teacher added successfully. Above mentioned is Teacher ID mail them before it\'s too late and ask them to Authenticate and generate password</string>
+    <string name="pass_gen">New to AcaDroid. Initialize your password and get your account ready in one minute.</string>
+
+    <string-array name="class_array">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+    </string-array>
+
+    <string-array name="grade_array">
+        <item>A</item>
+        <item>B</item>
+        <item>C</item>
+    </string-array>
+
+    <string-array name="teacher_array">
+        <item>-Select Class Teacher-</item>
+        <item>Mr. Jonathan</item>
+        <item>Mrs. Marrie</item>
+        <item>Mr. Margurite Girard</item>
+        <item>Mrs. Tracy Shrader</item>
+        <item>Mr. Ermelinda Shevlin</item>
+        <item>Mrs. Federico Brayton</item>
+        <item>Mr. Latisha Pearse</item>
+        <item>Mrs. Denise Remus</item>
+        <item>Mr. Tracie Searle</item>
+        <item>Mrs. Werner Poppe</item>
+        <item>Mr. Sandi Endsley</item>
+        <item>Mrs. Penelope Raasch</item>
+        <item>Mrs. Suzi Greenland</item>
+    </string-array>
 </resources>

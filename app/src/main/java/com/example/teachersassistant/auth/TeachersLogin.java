@@ -13,8 +13,13 @@ import android.widget.Toast;
 
 import com.example.teachersassistant.R;
 import com.example.teachersassistant.admin.AdminMain;
+import com.example.teachersassistant.modal.Teachers;
 import com.example.teachersassistant.modal.Users;
 import com.example.teachersassistant.admin.AddTeachers;
+import com.example.teachersassistant.teacher.TeacherMain;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -23,12 +28,14 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.HashMap;
+
 public class TeachersLogin extends AppCompatActivity {
 
-    TextInputLayout teacherId;
+    TextInputLayout teacherId, teacherPwd, bottomPwd;
     FirebaseAuth mAuth;
     DatabaseReference teacherRef;
-    Button authenticate;
+    Button authenticate, generatePwd;
     String parentDBName = "admin";
     ProgressDialog loadingBar;
 
@@ -43,58 +50,88 @@ public class TeachersLogin extends AppCompatActivity {
         loadingBar = new ProgressDialog(this);
 
         teacherId = findViewById(R.id.teacherIdLay);
+        teacherPwd = findViewById(R.id.teacherPwdLay);
+
         authenticate = findViewById(R.id.authenticateBtn);
         authenticate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 parentDBName = "admin";
-
                 final String userid = teacherId.getEditText().getText().toString();
+                final String password = teacherPwd.getEditText().getText().toString();
 
-                if (TextUtils.isEmpty(userid))
-                {
+                if (TextUtils.isEmpty(userid)) {
                     Toast.makeText(TeachersLogin.this, "Field's are empty!", Toast.LENGTH_SHORT).show();
-                }
-                else
-                {
-
+                } else {
                     loadingBar.setMessage("please wait...");
                     loadingBar.setCanceledOnTouchOutside(false);
                     loadingBar.show();
 
                     final DatabaseReference rootRef;
                     rootRef = FirebaseDatabase.getInstance().getReference();
-                    rootRef.addListenerForSingleValueEvent(new ValueEventListener()
-                    {
+                    rootRef.addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
-                        public void onDataChange(@NonNull DataSnapshot dataSnapshot)
-                        {
-                            if (dataSnapshot.child(parentDBName).child(userid).exists())
-                            {
-                                Users usersData = dataSnapshot.child(parentDBName).child(userid).getValue(Users.class);
+                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                            if (dataSnapshot.child("admin").child(userid).exists()) {
+                                Users usersData = dataSnapshot.child("admin").child(userid).getValue(Users.class);
                                 assert usersData != null;
-                                if (usersData.getUseridd().equals(userid))
-                                {
-                                    if (parentDBName.equals("admin"))
-                                    {
+                                if (usersData.getUseridd().equals(userid)) {
+                                    if (parentDBName.equals("admin")) {
                                         Toast.makeText(TeachersLogin.this, "Logged in as admin!", Toast.LENGTH_SHORT).show();
                                         startActivity(new Intent(TeachersLogin.this, AdminMain.class));
                                         loadingBar.dismiss();
                                     }
                                 }
-                            }
-                            else
-                            {
+                            } else if (dataSnapshot.child("Teachers").child(userid).exists()) {
+                                Teachers teachersDate = dataSnapshot.child("Teachers").child(userid).getValue(Teachers.class);
+                                if (teachersDate.getTeacherID().equals(userid)) {
+                                    if (teachersDate.getPassword().equals("dummy")) {
+                                        BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(TeachersLogin.this);
+                                        bottomSheetDialog.setContentView(R.layout.bottom_sheet);
+                                        bottomSheetDialog.setCanceledOnTouchOutside(false);
+
+                                        //INITIALIZE YOUR VARIABLES
+                                        bottomPwd = bottomSheetDialog.findViewById(R.id.teacherPasswordLay);
+                                        generatePwd = bottomSheetDialog.findViewById(R.id.generatePwd);
+                                        generatePwd.setOnClickListener(new View.OnClickListener() {
+                                            @Override
+                                            public void onClick(View v) {
+                                                String password = bottomPwd.getEditText().getText().toString();
+                                                final DatabaseReference pwdRef;
+                                                pwdRef = FirebaseDatabase.getInstance().getReference().child("Teachers");
+                                                HashMap<String, Object> pwdMap = new HashMap<String, Object>();
+                                                pwdMap.put("Password", password);
+                                                pwdRef.child(userid).updateChildren(pwdMap).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                    @Override
+                                                    public void onComplete(@NonNull Task<Void> task) {
+                                                        Toast.makeText(TeachersLogin.this, "Logged in as Teacher!", Toast.LENGTH_SHORT).show();
+                                                        startActivity(new Intent(TeachersLogin.this, TeacherMain.class));
+                                                        loadingBar.dismiss();
+                                                    }
+                                                });
+                                            }
+                                        });
+
+                                        bottomSheetDialog.show();
+                                    } else {
+                                        teacherPwd.setVisibility(View.VISIBLE);
+                                        loadingBar.dismiss();
+                                        if (teachersDate.getPassword().equals(password)) {
+                                            Toast.makeText(TeachersLogin.this, "Logged in as admin!", Toast.LENGTH_SHORT).show();
+                                            startActivity(new Intent(TeachersLogin.this, TeacherMain.class));
+                                            loadingBar.dismiss();
+                                        }
+                                    }
+                                }
+                            } else {
                                 Toast.makeText(TeachersLogin.this, "No record found!", Toast.LENGTH_SHORT).show();
                                 loadingBar.dismiss();
                             }
-
                         }
 
                         @Override
-                        public void onCancelled(@NonNull DatabaseError databaseError)
-                        { }
+                        public void onCancelled(@NonNull DatabaseError databaseError) {
+                        }
                     });
                 }
 
@@ -102,4 +139,5 @@ public class TeachersLogin extends AppCompatActivity {
         });
 
     }
+
 }
