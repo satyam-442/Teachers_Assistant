@@ -12,6 +12,18 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TeachersAssistant">
         <activity
+            android:name=".teacher.StudentsProfile"
+            android:exported="true" />
+        <activity
+            android:name=".teacher.ViewStudentsRequest"
+            android:exported="true" />
+        <activity
+            android:name=".teacher.ViewStudent"
+            android:exported="true" />
+        <activity
+            android:name=".teacher.ClassActivity"
+            android:exported="true" />
+        <activity
             android:name=".teacher.TeacherMain"
             android:exported="true" />
         <activity

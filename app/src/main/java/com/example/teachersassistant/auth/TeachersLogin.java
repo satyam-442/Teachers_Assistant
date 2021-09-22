@@ -5,10 +5,13 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.Toast;
 
 import com.example.teachersassistant.R;
@@ -38,6 +41,7 @@ public class TeachersLogin extends AppCompatActivity {
     Button authenticate, generatePwd;
     String parentDBName = "admin";
     ProgressDialog loadingBar;
+    CheckBox rememberMe;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +55,39 @@ public class TeachersLogin extends AppCompatActivity {
 
         teacherId = findViewById(R.id.teacherIdLay);
         teacherPwd = findViewById(R.id.teacherPwdLay);
+
+        SharedPreferences preferences = getSharedPreferences("checkbox",MODE_PRIVATE);
+        String checkbox = preferences.getString("remember","");
+        if (checkbox.equals("true")){
+            Intent intent = new Intent(TeachersLogin.this, TeacherMain.class);
+            intent.putExtra("teacherID",teacherId.getEditText().getText().toString());
+            startActivity(intent);
+        }
+        else if (checkbox.equals("false")){
+            Toast.makeText(TeachersLogin.this, "Please sign in", Toast.LENGTH_SHORT).show();
+        }
+
+        rememberMe = findViewById(R.id.rememberMe);
+        rememberMe.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (buttonView.isChecked()){
+                    SharedPreferences preferences = getSharedPreferences("checkbox",MODE_PRIVATE);
+                    SharedPreferences.Editor editor = preferences.edit();
+                    editor.putString("remember","true");
+                    editor.apply();
+                    Toast.makeText(getApplicationContext(), "Checked", Toast.LENGTH_SHORT).show();
+                }
+                else if (!buttonView.isChecked()){
+                    SharedPreferences preferences = getSharedPreferences("checkbox",MODE_PRIVATE);
+                    SharedPreferences.Editor editor = preferences.edit();
+                    editor.putString("remember","false");
+                    editor.apply();
+                    Toast.makeText(getApplicationContext(), "Unchecked", Toast.LENGTH_SHORT).show();
+                }
+
+            }
+        });
 
         authenticate = findViewById(R.id.authenticateBtn);
         authenticate.setOnClickListener(new View.OnClickListener() {
@@ -82,8 +119,8 @@ public class TeachersLogin extends AppCompatActivity {
                                         loadingBar.dismiss();
                                     }
                                 }
-                            } else if (dataSnapshot.child("Teachers").child(userid).exists()) {
-                                Teachers teachersDate = dataSnapshot.child("Teachers").child(userid).getValue(Teachers.class);
+                            } else if (dataSnapshot.child("Teachers").child("ClassTeacher").child(userid).exists()) {
+                                Teachers teachersDate = dataSnapshot.child("Teachers").child("ClassTeacher").child(userid).getValue(Teachers.class);
                                 if (teachersDate.getTeacherID().equals(userid)) {
                                     if (teachersDate.getPassword().equals("dummy")) {
                                         BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(TeachersLogin.this);
@@ -97,28 +134,35 @@ public class TeachersLogin extends AppCompatActivity {
                                             @Override
                                             public void onClick(View v) {
                                                 String password = bottomPwd.getEditText().getText().toString();
-                                                final DatabaseReference pwdRef;
-                                                pwdRef = FirebaseDatabase.getInstance().getReference().child("Teachers");
+                                                final DatabaseReference classPwdRef,subjPwdRef;
+                                                classPwdRef = FirebaseDatabase.getInstance().getReference().child("Teachers");
+                                                subjPwdRef = FirebaseDatabase.getInstance().getReference().child("Teachers");
                                                 HashMap<String, Object> pwdMap = new HashMap<String, Object>();
                                                 pwdMap.put("Password", password);
-                                                pwdRef.child(userid).updateChildren(pwdMap).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                classPwdRef.child("ClassTeacher").child(userid).updateChildren(pwdMap).addOnCompleteListener(new OnCompleteListener<Void>() {
                                                     @Override
                                                     public void onComplete(@NonNull Task<Void> task) {
                                                         Toast.makeText(TeachersLogin.this, "Logged in as Teacher!", Toast.LENGTH_SHORT).show();
-                                                        startActivity(new Intent(TeachersLogin.this, TeacherMain.class));
+                                                        Intent intent = new Intent(TeachersLogin.this, TeacherMain.class);
+                                                        intent.putExtra("teacherID",userid);
+                                                        startActivity(intent);
                                                         loadingBar.dismiss();
                                                     }
                                                 });
+                                                subjPwdRef.child("SubjectTeacher").child(userid).updateChildren(pwdMap);
                                             }
                                         });
 
                                         bottomSheetDialog.show();
                                     } else {
                                         teacherPwd.setVisibility(View.VISIBLE);
+                                        rememberMe.setVisibility(View.VISIBLE);
                                         loadingBar.dismiss();
                                         if (teachersDate.getPassword().equals(password)) {
-                                            Toast.makeText(TeachersLogin.this, "Logged in as admin!", Toast.LENGTH_SHORT).show();
-                                            startActivity(new Intent(TeachersLogin.this, TeacherMain.class));
+                                            Toast.makeText(TeachersLogin.this, "Logged in as teacher!", Toast.LENGTH_SHORT).show();
+                                            Intent intent = new Intent(TeachersLogin.this, TeacherMain.class);
+                                            intent.putExtra("teacherID",userid);
+                                            startActivity(intent);
                                             loadingBar.dismiss();
                                         }
                                     }

@@ -25,7 +25,7 @@ public class SuccessAddPage extends AppCompatActivity {
         name = getIntent().getExtras().get("name").toString();
 
         subject = "Welcome to AcaDroid! Activate your Account in 2 minutes.";
-        body = "Hi " + name + (ID) + " ,\n" +
+        body = "Hi " + name + " " + ID + " ,\n" +
                 "Welcome to AcaDroid! We thank you for choosing us as your preferred partner for your " +
                 "School Management. Your account is not activated yet and below are some important details\n" +
                 "Your AcaDroid Login Credentials:\n" +

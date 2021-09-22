@@ -20,4 +20,9 @@ public class AdminMain extends AppCompatActivity {
         Intent intent = new Intent(this,AddTeachers.class);
         startActivity(intent);
     }
+
+    public void viewTeacher(View view) {
+        Intent intent = new Intent(this,ViewTeachers.class);
+        startActivity(intent);
+    }
 }

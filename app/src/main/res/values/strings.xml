@@ -8,6 +8,7 @@
     <string name="addTeacher">Add Teacher</string>
     <string name="success_auth_message">Teacher added successfully. Above mentioned is Teacher ID mail them before it\'s too late and ask them to Authenticate and generate password</string>
     <string name="pass_gen">New to AcaDroid. Initialize your password and get your account ready in one minute.</string>
+    <string name="class_teacher_text">Select the Class and Division you handle as class teacher</string>
 
     <string-array name="class_array">
         <item>1</item>

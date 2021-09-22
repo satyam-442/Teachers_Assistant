@@ -126,7 +126,8 @@
                         android:layout_alignParentTop="true"
                         android:layout_alignParentEnd="true"
                         android:layout_alignParentBottom="true"
-                        android:background="@android:color/transparent" />
+                        android:background="@android:color/transparent"
+                        android:onClick="viewTeacher"/>
                 </RelativeLayout>
             </androidx.cardview.widget.CardView>
         </LinearLayout>
