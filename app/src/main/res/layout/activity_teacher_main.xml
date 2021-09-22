@@ -24,10 +24,24 @@
         android:layout_marginStart="24dp"
         android:layout_marginTop="24dp"
         android:fontFamily="@font/lato"
-        android:text="Welcome"
+        android:text="Welcome to class"
+        android:padding="5dp"
         android:textSize="30sp"
         android:textColor="@color/purple_700"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+
+    <TextView
+        android:id="@+id/teacherMainClassStd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:fontFamily="@font/lato"
+        android:padding="5dp"
+        android:text=""
+        android:textColor="@color/purple_700"
+        android:textSize="30sp"
+        app:layout_constraintStart_toEndOf="@id/greetings"
         app:layout_constraintTop_toBottomOf="@+id/toolbar" />
 
     <TextView
@@ -35,10 +49,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
-        android:textSize="16sp"
+        android:layout_marginTop="8dp"
         android:fontFamily="@font/lato"
-        android:textColor="@color/purple_700"
         android:text="Manage student at fingertips"
+        android:textColor="@color/purple_700"
+        android:textSize="16sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/greetings" />
 

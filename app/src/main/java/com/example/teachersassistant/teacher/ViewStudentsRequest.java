@@ -32,7 +32,7 @@ public class ViewStudentsRequest extends AppCompatActivity {
     RecyclerView viewRequestRecList;
     DatabaseReference teacherRef;
     TextInputLayout requestViewStudent;
-    String teacherID;
+    String teacherID, classStdGrade;
     ProgressDialog loadingBar;
     DatabaseReference reqRef;
 
@@ -44,6 +44,7 @@ public class ViewStudentsRequest extends AppCompatActivity {
         loadingBar = new ProgressDialog(this);
 
         teacherID = getIntent().getExtras().get("teacherID").toString();
+        classStdGrade = getIntent().getExtras().get("classStd").toString();
 
         reqRef = FirebaseDatabase.getInstance().getReference().child("StudRequest");
 
@@ -57,21 +58,6 @@ public class ViewStudentsRequest extends AppCompatActivity {
         requestViewStudent = findViewById(R.id.requestViewText);
 
         teacherRef = FirebaseDatabase.getInstance().getReference().child("Teachers").child("ClassTeacher").child(teacherID);
-        teacherRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if (snapshot.exists()) {
-                    String std = snapshot.child("Class").getValue().toString();
-                    String grade = snapshot.child("Grade").getValue().toString();
-                    final String stdgrade = std + grade;
-                    requestViewStudent.getEditText().setText(stdgrade);
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-            }
-        });
         startListen();
     }
 
@@ -86,12 +72,12 @@ public class ViewStudentsRequest extends AppCompatActivity {
 
     private void startListen() {
         String stdgrade = requestViewStudent.getEditText().getText().toString();
-        Query query = FirebaseDatabase.getInstance().getReference().child("StudRequest").child(stdgrade).limitToLast(50);
+        Query query = FirebaseDatabase.getInstance().getReference().child("StudRequest").child(classStdGrade).limitToLast(50);
         //Query query = reqRef.child(stdgrade).limitToLast(50);
         FirebaseRecyclerOptions<ClassTeacher> options = new FirebaseRecyclerOptions.Builder<ClassTeacher>().setQuery(query, ClassTeacher.class).build();
         FirebaseRecyclerAdapter<ClassTeacher,DonorsViewHolder> firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<ClassTeacher, DonorsViewHolder>(options) {
             @Override
-            protected void onBindViewHolder(DonorsViewHolder holder, final int position, ClassTeacher model) {
+            protected void onBindViewHolder(DonorsViewHolder holder, int position, ClassTeacher model) {
                 //final String PostKey = getRef(position).getKey();
                 holder.setFirstName(model.getFirstName());
                 holder.setLastName(model.getLastName());
@@ -124,12 +110,6 @@ public class ViewStudentsRequest extends AppCompatActivity {
         viewRequestRecList.setAdapter(firebaseRecyclerAdapter);
         firebaseRecyclerAdapter.startListening();
     }
-
-    /*public void goToViewRequest(View view) {
-        Intent intent = new Intent(this,ViewStudentsRequest.class);
-        intent.putExtra("teacherID",teacherID);
-        startActivity(intent);
-    }*/
 
     /*And this is the static class*/
     public static class DonorsViewHolder extends RecyclerView.ViewHolder {

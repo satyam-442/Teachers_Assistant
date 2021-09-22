@@ -8,7 +8,7 @@
         <entry key="..\:/SATYAM/FlutterProjectLeraning/TeachersAssistant/app/src/main/res/drawable/gradient_spinner.xml" value="0.20555555555555555" />
         <entry key="..\:/SATYAM/FlutterProjectLeraning/TeachersAssistant/app/src/main/res/drawable/reject_btn.xml" value="0.19444444444444445" />
         <entry key="..\:/SATYAM/FlutterProjectLeraning/TeachersAssistant/app/src/main/res/drawable/spinner_bg.xml" value="0.20555555555555555" />
-        <entry key="..\:/SATYAM/FlutterProjectLeraning/TeachersAssistant/app/src/main/res/layout/activity_add_teachers.xml" value="0.21041666666666667" />
+        <entry key="..\:/SATYAM/FlutterProjectLeraning/TeachersAssistant/app/src/main/res/layout/activity_add_teachers.xml" value="0.17" />
         <entry key="..\:/SATYAM/FlutterProjectLeraning/TeachersAssistant/app/src/main/res/layout/activity_admin_main.xml" value="0.2" />
         <entry key="..\:/SATYAM/FlutterProjectLeraning/TeachersAssistant/app/src/main/res/layout/activity_class.xml" value="0.22447916666666667" />
         <entry key="..\:/SATYAM/FlutterProjectLeraning/TeachersAssistant/app/src/main/res/layout/activity_main.xml" value="0.22447916666666667" />
@@ -23,6 +23,7 @@
         <entry key="..\:/SATYAM/FlutterProjectLeraning/TeachersAssistant/app/src/main/res/layout/activity_view_teachers.xml" value="0.22" />
         <entry key="..\:/SATYAM/FlutterProjectLeraning/TeachersAssistant/app/src/main/res/layout/activity_welcome_screen.xml" value="0.21041666666666667" />
         <entry key="..\:/SATYAM/FlutterProjectLeraning/TeachersAssistant/app/src/main/res/layout/all_student_request.xml" value="0.22" />
+        <entry key="..\:/SATYAM/FlutterProjectLeraning/TeachersAssistant/app/src/main/res/layout/all_students.xml" value="0.22" />
         <entry key="..\:/SATYAM/FlutterProjectLeraning/TeachersAssistant/app/src/main/res/layout/bottom_sheet.xml" value="0.2" />
         <entry key="..\:/SATYAM/FlutterProjectLeraning/TeachersAssistant/app/src/main/res/layout/bottom_sheet_classrom.xml" value="0.22447916666666667" />
         <entry key="..\:/SATYAM/FlutterProjectLeraning/TeachersAssistant/app/src/main/res/layout/bottom_sheet_table.xml" value="0.18" />

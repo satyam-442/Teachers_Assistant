@@ -19,6 +19,7 @@ import com.example.teachersassistant.admin.AdminMain;
 import com.example.teachersassistant.modal.Teachers;
 import com.example.teachersassistant.modal.Users;
 import com.example.teachersassistant.admin.AddTeachers;
+import com.example.teachersassistant.prevalent.Prevalent;
 import com.example.teachersassistant.teacher.TeacherMain;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -32,6 +33,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.HashMap;
+
+import io.paperdb.Paper;
 
 public class TeachersLogin extends AppCompatActivity {
 
@@ -56,38 +59,16 @@ public class TeachersLogin extends AppCompatActivity {
         teacherId = findViewById(R.id.teacherIdLay);
         teacherPwd = findViewById(R.id.teacherPwdLay);
 
-        SharedPreferences preferences = getSharedPreferences("checkbox",MODE_PRIVATE);
-        String checkbox = preferences.getString("remember","");
-        if (checkbox.equals("true")){
-            Intent intent = new Intent(TeachersLogin.this, TeacherMain.class);
-            intent.putExtra("teacherID",teacherId.getEditText().getText().toString());
-            startActivity(intent);
-        }
-        else if (checkbox.equals("false")){
-            Toast.makeText(TeachersLogin.this, "Please sign in", Toast.LENGTH_SHORT).show();
-        }
-
         rememberMe = findViewById(R.id.rememberMe);
-        rememberMe.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (buttonView.isChecked()){
-                    SharedPreferences preferences = getSharedPreferences("checkbox",MODE_PRIVATE);
-                    SharedPreferences.Editor editor = preferences.edit();
-                    editor.putString("remember","true");
-                    editor.apply();
-                    Toast.makeText(getApplicationContext(), "Checked", Toast.LENGTH_SHORT).show();
-                }
-                else if (!buttonView.isChecked()){
-                    SharedPreferences preferences = getSharedPreferences("checkbox",MODE_PRIVATE);
-                    SharedPreferences.Editor editor = preferences.edit();
-                    editor.putString("remember","false");
-                    editor.apply();
-                    Toast.makeText(getApplicationContext(), "Unchecked", Toast.LENGTH_SHORT).show();
-                }
+        Paper.init(this);
 
+        String UserTeacherIDKey = Paper.book().read(Prevalent.UserTeacherIDKey);
+        String UserPasswordKey = Paper.book().read(Prevalent.UserPasswordKey);
+        if (UserTeacherIDKey != "" && UserPasswordKey != "") {
+            if (!TextUtils.isEmpty(UserTeacherIDKey) && !TextUtils.isEmpty(UserPasswordKey)) {
+                AllowTeacherToLogin(UserTeacherIDKey, UserPasswordKey);
             }
-        });
+        }
 
         authenticate = findViewById(R.id.authenticateBtn);
         authenticate.setOnClickListener(new View.OnClickListener() {
@@ -96,6 +77,11 @@ public class TeachersLogin extends AppCompatActivity {
                 parentDBName = "admin";
                 final String userid = teacherId.getEditText().getText().toString();
                 final String password = teacherPwd.getEditText().getText().toString();
+
+                if (rememberMe.isChecked()){
+                    Paper.book().write(Prevalent.UserTeacherIDKey, userid);
+                    Paper.book().write(Prevalent.UserPasswordKey, password);
+                }
 
                 if (TextUtils.isEmpty(userid)) {
                     Toast.makeText(TeachersLogin.this, "Field's are empty!", Toast.LENGTH_SHORT).show();
@@ -182,6 +168,36 @@ public class TeachersLogin extends AppCompatActivity {
             }
         });
 
+    }
+
+    private void AllowTeacherToLogin(String userTeacherIDKey, String userPasswordKey) {
+        loadingBar.setMessage("validating");
+        loadingBar.setCanceledOnTouchOutside(false);
+        loadingBar.show();
+        final DatabaseReference rootRef;
+        rootRef = FirebaseDatabase.getInstance().getReference();
+        rootRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if (dataSnapshot.child("Teachers").child("ClassTeacher").child(userTeacherIDKey).exists()) {
+                    Teachers teachersDate = dataSnapshot.child("Teachers").child("ClassTeacher").child(userTeacherIDKey).getValue(Teachers.class);
+                    if (teachersDate.getTeacherID().equals(userTeacherIDKey)) {
+                        if (teachersDate.getPassword().equals(userPasswordKey)) {
+                            //Toast.makeText(TeachersLogin.this, "Logged in as Teacher!", Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent(TeachersLogin.this, TeacherMain.class);
+                            intent.putExtra("teacherID",userTeacherIDKey);
+                            startActivity(intent);
+                            loadingBar.dismiss();
+                        }
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
 
 }
