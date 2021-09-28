@@ -46,8 +46,8 @@ public class AddTeachers extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_teachers);
 
-        teacherRef = FirebaseDatabase.getInstance().getReference().child("Teachers");
-        classTeacherRef = FirebaseDatabase.getInstance().getReference().child("ClassTeacher");
+        teacherRef = FirebaseDatabase.getInstance().getReference();
+        //classTeacherRef = FirebaseDatabase.getInstance().getReference().child("ClassTeacher");
         allTeacherList = FirebaseDatabase.getInstance().getReference().child("AllTeachers");
 
         teacherFirstName = findViewById(R.id.teacherFirstNameLay);
@@ -109,7 +109,7 @@ public class AddTeachers extends AppCompatActivity {
                         teacherMap.put("subjectTeacher",subjTeach);
                         teacherMap.put("image","default");
                         teacherMap.put("teacherID",teacherId);
-                        teacherRef.child("ClassTeacher").child(teacherId).updateChildren(teacherMap).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        teacherRef.child("Teachers").child("ClassTeacher").child(teacherId).updateChildren(teacherMap).addOnCompleteListener(new OnCompleteListener<Void>() {
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {
                             /*if (classTeach.equals("T")){
@@ -130,7 +130,7 @@ public class AddTeachers extends AppCompatActivity {
                                 }
                             }
                         });
-                        teacherRef.child("SubjectTeacher").child(teacherId).updateChildren(teacherMap);
+                        teacherRef.child("Teachers").child("SubjectTeacher").child(teacherId).updateChildren(teacherMap);
 
                         //ALL TEACHER LIST
                         HashMap<String, Object> allTeacherMap = new HashMap<String, Object>();
@@ -175,7 +175,7 @@ public class AddTeachers extends AppCompatActivity {
                         teacherMap.put("subjectTeacher",subjTeach);
                         teacherMap.put("image","default");
                         teacherMap.put("teacherID",teacherId);
-                        teacherRef.child("SubjectTeacher").child(teacherId).updateChildren(teacherMap).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        teacherRef.child("Teachers").child("SubjectTeacher").child(teacherId).updateChildren(teacherMap).addOnCompleteListener(new OnCompleteListener<Void>() {
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {
                             /*if (classTeach.equals("T")){
@@ -239,7 +239,7 @@ public class AddTeachers extends AppCompatActivity {
                         teacherMap.put("subjectTeacher",subjTeach);
                         teacherMap.put("image","default");
                         teacherMap.put("teacherID",teacherId);
-                        teacherRef.child("SubjectTeacher").child(teacherId).updateChildren(teacherMap).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        teacherRef.child("Teachers").child("SubjectTeacher").child(teacherId).updateChildren(teacherMap).addOnCompleteListener(new OnCompleteListener<Void>() {
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {
                             /*if (classTeach.equals("T")){

@@ -21,11 +21,9 @@
             android:name=".teacher.ViewStudent"
             android:exported="true" />
         <activity
-            android:name=".teacher.ClassActivity"
-            android:exported="true" />
-        <activity
             android:name=".teacher.TeacherMain"
-            android:exported="true" />
+            android:exported="true"
+            android:noHistory="true"/>
         <activity
             android:name=".admin.ViewTeachers"
             android:exported="true" />

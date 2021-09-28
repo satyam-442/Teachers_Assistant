@@ -30,6 +30,8 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.HashMap;
 
+import io.paperdb.Paper;
+
 public class StudentLogin extends AppCompatActivity{
 
     LinearLayout loginLO, registerLO, linLO;
@@ -45,8 +47,10 @@ public class StudentLogin extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_student_login);
 
-        classTeacherRef = FirebaseDatabase.getInstance().getReference().child("StudRequest");
+        classTeacherRef = FirebaseDatabase.getInstance().getReference();
         loadingBar = new ProgressDialog(this);
+
+        Paper.init(this);
 
         //Image Slider
         int images[] = {R.drawable.one,R.drawable.two,R.drawable.three};
@@ -115,7 +119,7 @@ public class StudentLogin extends AppCompatActivity{
                     studentMap.put("image","default");
                     studentMap.put("teacher",teacher);
                     studentMap.put("studentID",studentID);
-                    classTeacherRef.child(classgrade).child(studentID).updateChildren(studentMap).addOnCompleteListener(new OnCompleteListener<Void>() {
+                    classTeacherRef.child("StudRequest").child(classgrade).child(studentID).updateChildren(studentMap).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
                             if (task.isSuccessful()){
@@ -149,9 +153,15 @@ public class StudentLogin extends AppCompatActivity{
         teacherSpinner.setOnItemSelectedListener(new TeacherStudentList());
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        Paper.book().destroy();
+    }
+
     private void Alert(String msg){
         AlertDialog dialog = new AlertDialog.Builder(this)
-                .setTitle("Acknowldege")
+                .setTitle("Acknowledge")
                 .setMessage(msg)
                 .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     @Override

@@ -15,8 +15,8 @@ public class ViewTeachers extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_teachers);
-        allTeachersRef = FirebaseDatabase.getInstance().getReference().child("AllTeachers");
-        classTeacherRef = FirebaseDatabase.getInstance().getReference().child("Teachers").child("ClassTeacher");
-        subjectTeacherRef = FirebaseDatabase.getInstance().getReference().child("Teachers").child("SubjectTeacher");
+        //allTeachersRef = FirebaseDatabase.getInstance().getReference().child("AllTeachers");
+        //classTeacherRef = FirebaseDatabase.getInstance().getReference().child("Teachers").child("ClassTeacher");
+        //subjectTeacherRef = FirebaseDatabase.getInstance().getReference().child("Teachers").child("SubjectTeacher");
     }
 }

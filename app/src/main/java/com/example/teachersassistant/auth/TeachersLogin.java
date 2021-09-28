@@ -20,6 +20,7 @@ import com.example.teachersassistant.modal.Teachers;
 import com.example.teachersassistant.modal.Users;
 import com.example.teachersassistant.admin.AddTeachers;
 import com.example.teachersassistant.prevalent.Prevalent;
+import com.example.teachersassistant.prevalent.SessionManager;
 import com.example.teachersassistant.teacher.TeacherMain;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -60,7 +61,7 @@ public class TeachersLogin extends AppCompatActivity {
         teacherPwd = findViewById(R.id.teacherPwdLay);
 
         rememberMe = findViewById(R.id.rememberMe);
-        Paper.init(this);
+        /*Paper.init(this);
 
         String UserTeacherIDKey = Paper.book().read(Prevalent.UserTeacherIDKey);
         String UserPasswordKey = Paper.book().read(Prevalent.UserPasswordKey);
@@ -68,6 +69,14 @@ public class TeachersLogin extends AppCompatActivity {
             if (!TextUtils.isEmpty(UserTeacherIDKey) && !TextUtils.isEmpty(UserPasswordKey)) {
                 AllowTeacherToLogin(UserTeacherIDKey, UserPasswordKey);
             }
+        }*/
+
+        SessionManager sessionManager = new SessionManager(TeachersLogin.this, SessionManager.SESSION_REMEMBERME);
+        if (sessionManager.checkRememberMe()){
+            HashMap<String,String> rememberMeDetails = sessionManager.getRememberMeDetailsFromSession();
+            Intent intent = new Intent(TeachersLogin.this,TeacherMain.class);
+            intent.putExtra("teacherID",rememberMeDetails.get(SessionManager.KEY_SESSION_ID));
+            startActivity(intent);
         }
 
         authenticate = findViewById(R.id.authenticateBtn);
@@ -78,10 +87,10 @@ public class TeachersLogin extends AppCompatActivity {
                 final String userid = teacherId.getEditText().getText().toString();
                 final String password = teacherPwd.getEditText().getText().toString();
 
-                if (rememberMe.isChecked()){
+                /*if (rememberMe.isChecked()){
                     Paper.book().write(Prevalent.UserTeacherIDKey, userid);
                     Paper.book().write(Prevalent.UserPasswordKey, password);
-                }
+                }*/
 
                 if (TextUtils.isEmpty(userid)) {
                     Toast.makeText(TeachersLogin.this, "Field's are empty!", Toast.LENGTH_SHORT).show();
@@ -120,7 +129,7 @@ public class TeachersLogin extends AppCompatActivity {
                                             @Override
                                             public void onClick(View v) {
                                                 String password = bottomPwd.getEditText().getText().toString();
-                                                final DatabaseReference classPwdRef,subjPwdRef;
+                                                final DatabaseReference classPwdRef, subjPwdRef;
                                                 classPwdRef = FirebaseDatabase.getInstance().getReference().child("Teachers");
                                                 subjPwdRef = FirebaseDatabase.getInstance().getReference().child("Teachers");
                                                 HashMap<String, Object> pwdMap = new HashMap<String, Object>();
@@ -129,8 +138,12 @@ public class TeachersLogin extends AppCompatActivity {
                                                     @Override
                                                     public void onComplete(@NonNull Task<Void> task) {
                                                         Toast.makeText(TeachersLogin.this, "Logged in as Teacher!", Toast.LENGTH_SHORT).show();
+                                                        if (rememberMe.isChecked()) {
+                                                            SessionManager sessionManager = new SessionManager(TeachersLogin.this, SessionManager.SESSION_REMEMBERME);
+                                                            sessionManager.createRememberMeSession(userid, password);
+                                                        }
                                                         Intent intent = new Intent(TeachersLogin.this, TeacherMain.class);
-                                                        intent.putExtra("teacherID",userid);
+                                                        intent.putExtra("teacherID", userid);
                                                         startActivity(intent);
                                                         loadingBar.dismiss();
                                                     }
@@ -146,8 +159,12 @@ public class TeachersLogin extends AppCompatActivity {
                                         loadingBar.dismiss();
                                         if (teachersDate.getPassword().equals(password)) {
                                             Toast.makeText(TeachersLogin.this, "Logged in as teacher!", Toast.LENGTH_SHORT).show();
+                                            if (rememberMe.isChecked()) {
+                                                SessionManager sessionManager = new SessionManager(TeachersLogin.this, SessionManager.SESSION_REMEMBERME);
+                                                sessionManager.createRememberMeSession(userid, password);
+                                            }
                                             Intent intent = new Intent(TeachersLogin.this, TeacherMain.class);
-                                            intent.putExtra("teacherID",userid);
+                                            intent.putExtra("teacherID", userid);
                                             startActivity(intent);
                                             loadingBar.dismiss();
                                         }
@@ -170,7 +187,7 @@ public class TeachersLogin extends AppCompatActivity {
 
     }
 
-    private void AllowTeacherToLogin(String userTeacherIDKey, String userPasswordKey) {
+    /*private void AllowTeacherToLogin(String userTeacherIDKey, String userPasswordKey) {
         loadingBar.setMessage("validating");
         loadingBar.setCanceledOnTouchOutside(false);
         loadingBar.show();
@@ -181,6 +198,7 @@ public class TeachersLogin extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.child("Teachers").child("ClassTeacher").child(userTeacherIDKey).exists()) {
                     Teachers teachersDate = dataSnapshot.child("Teachers").child("ClassTeacher").child(userTeacherIDKey).getValue(Teachers.class);
+                    assert teachersDate != null;
                     if (teachersDate.getTeacherID().equals(userTeacherIDKey)) {
                         if (teachersDate.getPassword().equals(userPasswordKey)) {
                             //Toast.makeText(TeachersLogin.this, "Logged in as Teacher!", Toast.LENGTH_SHORT).show();
@@ -198,6 +216,6 @@ public class TeachersLogin extends AppCompatActivity {
 
             }
         });
-    }
+    }*/
 
 }

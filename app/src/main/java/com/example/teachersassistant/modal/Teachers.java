@@ -1,15 +1,16 @@
 package com.example.teachersassistant.modal;
 
 public class Teachers {
-    String Email, Gender, Name, Password, Phone, classTeacher, image, subjectTeacher, teacherID;
+    String Email, Gender, FirstName, LastName, Password, Phone, classTeacher, image, subjectTeacher, teacherID;
 
     public Teachers() {
     }
 
-    public Teachers(String email, String gender, String name, String password, String phone, String classTeacher, String image, String subjectTeacher, String teacherID) {
+    public Teachers(String email, String gender, String firstName, String lastName, String password, String phone, String classTeacher, String image, String subjectTeacher, String teacherID) {
         Email = email;
         Gender = gender;
-        Name = name;
+        FirstName = firstName;
+        LastName = lastName;
         Password = password;
         Phone = phone;
         this.classTeacher = classTeacher;
@@ -18,67 +19,75 @@ public class Teachers {
         this.teacherID = teacherID;
     }
 
-    public String getEmaill() {
+    public String getEmail() {
         return Email;
     }
 
-    public void setEmaill(String email) {
+    public void setEmail(String email) {
         Email = email;
     }
 
-    public String getGenderr() {
+    public String getGender() {
         return Gender;
     }
 
-    public void setGenderr(String gender) {
+    public void setGender(String gender) {
         Gender = gender;
     }
 
-    public String getNamee() {
-        return Name;
+    public String getFirstName() {
+        return FirstName;
     }
 
-    public void setNamee(String name) {
-        Name = name;
+    public void setFirstName(String firstName) {
+        FirstName = firstName;
+    }
+
+    public String getLastName() {
+        return LastName;
+    }
+
+    public void setLastName(String lastName) {
+        LastName = lastName;
     }
 
     public String getPassword() {
         return Password;
     }
 
-    public void setPasswordd(String password) {
+    public void setPassword(String password) {
         Password = password;
     }
 
-    public String getPhonee() {
+    public String getPhone() {
         return Phone;
     }
 
-    public void setPhonee(String phone) {
+    public void setPhone(String phone) {
         Phone = phone;
     }
 
-    public String getClassTeacherr() {
+    public String getClassTeacher() {
         return classTeacher;
     }
 
-    public void setClassTeacherr(String classTeacher) {
+    public void setClassTeacher(String classTeacher) {
         this.classTeacher = classTeacher;
     }
 
-    public String getImagee() {
+    public String getImage() {
         return image;
     }
 
-    public void setImagee(String image) {
+    public void setImage(String image) {
         this.image = image;
     }
 
-    public String getSubjectTeacherr() {
+    public String getSubjectTeacher() {
         return subjectTeacher;
     }
 
-    public void setSubjectTeacherr(String subjectTeacher) {
+    public void setSubjectTeacher(String subjectTeacher) {
         this.subjectTeacher = subjectTeacher;
     }
 
@@ -86,7 +95,7 @@ public class Teachers {
         return teacherID;
     }
 
-    public void setTeacherIDD(String teacherID) {
+    public void setTeacherID(String teacherID) {
         this.teacherID = teacherID;
     }
 }

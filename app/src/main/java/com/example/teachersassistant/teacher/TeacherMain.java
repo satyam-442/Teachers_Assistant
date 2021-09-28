@@ -1,9 +1,11 @@
 package com.example.teachersassistant.teacher;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -41,7 +43,7 @@ public class TeacherMain extends AppCompatActivity {
 
     String teacherID;
     ImageView logout;
-    DatabaseReference teacherRef, classTeacherRef;
+    DatabaseReference teacherRef;
     ProgressDialog loadingBar;
     TextView mainClassStd;
 
@@ -50,16 +52,17 @@ public class TeacherMain extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_teacher_main);
 
-        Paper.init(this);
-
+        //Paper.init(this);
         loadingBar = new ProgressDialog(this);
-
         mainClassStd = findViewById(R.id.teacherMainClassStd);
 
         teacherID = getIntent().getExtras().get("teacherID").toString();
 
-        teacherRef = FirebaseDatabase.getInstance().getReference().child("Teachers").child("ClassTeacher").child(teacherID);
-        teacherRef.addValueEventListener(new ValueEventListener() {
+        loadingBar.setMessage("please wait...");
+        loadingBar.setCanceledOnTouchOutside(false);
+        loadingBar.show();
+        teacherRef = FirebaseDatabase.getInstance().getReference();
+        teacherRef.child("Teachers").child("ClassTeacher").child(teacherID).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.exists()) {
@@ -67,6 +70,7 @@ public class TeacherMain extends AppCompatActivity {
                     String grade = snapshot.child("Grade").getValue().toString();
                     String classGrade = classStd + grade;
                     mainClassStd.setText(classGrade);
+                    loadingBar.dismiss();
                 }
             }
 
@@ -75,19 +79,31 @@ public class TeacherMain extends AppCompatActivity {
             }
         });
 
-        classTeacherRef = FirebaseDatabase.getInstance().getReference().child("ClassTeacher");
-
         logout = findViewById(R.id.logout);
-        logout.setOnClickListener(new View.OnClickListener() {
+        /*logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Paper.book().destroy();
                 Intent intent = new Intent(TeacherMain.this, WelcomeScreen.class);
                 startActivity(intent);
             }
-        });
+        });*/
+    }
 
-
+    @Override
+    public void onBackPressed() {
+        new AlertDialog.Builder(this)
+                .setTitle("Really Exit?")
+                .setMessage("Are you sure you want to exit?")
+                .setNegativeButton(android.R.string.no, null)
+                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface arg0, int arg1) {
+                        Intent a = new Intent(Intent.ACTION_MAIN);
+                        a.addCategory(Intent.CATEGORY_HOME);
+                        a.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        startActivity(a);
+                    }
+                }).create().show();
     }
 
     public void goToStudent(View view) {
