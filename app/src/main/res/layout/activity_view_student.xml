@@ -36,7 +36,8 @@
                     android:layout_width="120dp"
                     android:layout_height="120dp"
                     android:src="@drawable/view"
-                    android:layout_marginTop="8dp"/>
+                    android:layout_marginTop="8dp"
+                    android:onClick="goToViewStudent"/>
 
                 <TextView
                     android:layout_width="match_parent"
@@ -46,7 +47,8 @@
                     android:textSize="18sp"
                     android:fontFamily="@font/lato"
                     android:textColor="@color/purple_700"
-                    android:layout_marginBottom="8dp"/>
+                    android:layout_marginBottom="8dp"
+                    android:onClick="goToViewStudent"/>
 
             </LinearLayout>
 

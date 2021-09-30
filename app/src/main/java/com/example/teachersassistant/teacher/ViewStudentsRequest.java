@@ -10,21 +10,25 @@ import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.teachersassistant.R;
+import com.example.teachersassistant.auth.TeachersLogin;
 import com.example.teachersassistant.modal.ClassTeacher;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -42,7 +46,10 @@ public class ViewStudentsRequest extends AppCompatActivity {
     TextInputLayout requestViewStudent;
     String teacherID, classStdGrade;
     ProgressDialog loadingBar;
+    RelativeLayout sendMailBtn;
     DatabaseReference reqRef, studentsRef, teacherStudentRef, removeStudRef, rejectedStudRef;
+    String ID, mailID, name, subject, body;
+    TextView studentIDText, studentEmailText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -94,45 +101,38 @@ public class ViewStudentsRequest extends AppCompatActivity {
                 holder.setGrade(model.getGrade());
                 holder.setStudentID(model.getStudentID());
                 holder.setTeacherName(model.getTeacher());
-                /*holder.acceptBtn.setOnClickListener(new View.OnClickListener() {
+
+                holder.acceptBtn.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        HashMap<String, Object> studentMap = new HashMap<String, Object>();
-                        studentMap.put("FirstName", model.getFirstName());
-                        studentMap.put("LastName", model.getLastName());
-                        studentMap.put("Gender", model.getGender());
-                        studentMap.put("Class", model.getClassStd());
-                        studentMap.put("Grade", model.getGrade());
-                        studentMap.put("Phone", model.getPhone());
-                        studentMap.put("StudentID", model.getStudentID());
-                        studentMap.put("Email", model.getEmail());
-                        studentMap.put("Password", "dummy");
-                        //teacherStudentRef.child("TeachersClass").child(teacherID).child("Students").child(model.getStudentID()).updateChildren(studentMap);
-                        //studentsRef.child(model.getStudentID()).updateChildren(studentMap);
-                        //removeStudRef.child("StudRequest").child(classStdGrade).child(model.getStudentID()).removeValue();
-                        Toast.makeText(getApplicationContext(), "Data Accepted", Toast.LENGTH_SHORT).show();
+                        String fname = model.getFirstName();
+                        String lname = model.getLastName();
+                        String gender = model.getGender();
+                        String classStd = model.getClassStd();
+                        String grade = model.getGrade();
+                        String phone = model.getPhone();
+                        String studId = model.getStudentID();
+                        String email = model.getEmail();
+                        AcceptStudentRequest(fname,lname,gender,classStd,grade,phone,studId,email);
                     }
                 });
+
                 holder.rejectBtn.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        HashMap<String, Object> studentMap = new HashMap<String, Object>();
-                        studentMap.put("FirstName", model.getFirstName());
-                        studentMap.put("LastName", model.getLastName());
-                        studentMap.put("Gender", model.getGender());
-                        studentMap.put("Class", model.getClassStd());
-                        studentMap.put("Grade", model.getGrade());
-                        studentMap.put("Phone", model.getPhone());
-                        studentMap.put("StudentID", model.getStudentID());
-                        studentMap.put("Email", model.getEmail());
-                        studentMap.put("Password", "dummy");
-                        //teacherStudentRef.child("TeachersClass").child(teacherID).child("RejectStudents").child(model.getStudentID()).updateChildren(studentMap);
-                        //rejectedStudRef.child(model.getStudentID()).updateChildren(studentMap);
-                        //removeStudRef.child("StudRequest").child(classStdGrade).child(model.getStudentID()).removeValue();
-                        Toast.makeText(getApplicationContext(), "Data Rejected", Toast.LENGTH_SHORT).show();
+                        String fname = model.getFirstName();
+                        String lname = model.getLastName();
+                        String gender = model.getGender();
+                        String classStd = model.getClassStd();
+                        String grade = model.getGrade();
+                        String phone = model.getPhone();
+                        String studId = model.getStudentID();
+                        String email = model.getEmail();
+                        RejectStudentRequest(fname,lname,gender,classStd,grade,phone,studId,email);
                     }
-                });*/
-                holder.itemView.setOnClickListener(new View.OnClickListener() {
+                });
+
+                /*holder.itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         String studentID = model.getStudentID();
@@ -171,7 +171,7 @@ public class ViewStudentsRequest extends AppCompatActivity {
                         });
                         builder.show();
                     }
-                });
+                });*/
                 loadingBar.dismiss();
             }
 
@@ -191,15 +191,15 @@ public class ViewStudentsRequest extends AppCompatActivity {
         studentMap.put("FirstName", fname);
         studentMap.put("LastName", lname);
         studentMap.put("Gender", gender);
-        studentMap.put("Class", classStd);
+        studentMap.put("classStd", classStd);
         studentMap.put("Grade", grade);
         studentMap.put("Phone", phone);
         studentMap.put("StudentID", studId);
         studentMap.put("Email", email);
         studentMap.put("Password", "dummy");
-        teacherStudentRef.child("TeachersClass").child(teacherID).child("RejectStudents").child(studId).updateChildren(studentMap);
         //rejectedStudRef.child("RejectedStud").child(studentID).updateChildren(studentMap);
         removeStudRef.child("StudRequest").child(classStdGrade).child(studId).removeValue();
+        teacherStudentRef.child("TeachersClass").child(teacherID).child("RejectStudents").child(studId).updateChildren(studentMap);
         Toast.makeText(getApplicationContext(), "Data Rejected", Toast.LENGTH_SHORT).show();
     }
 
@@ -208,14 +208,57 @@ public class ViewStudentsRequest extends AppCompatActivity {
         studentMap.put("FirstName", fname);
         studentMap.put("LastName", lname);
         studentMap.put("Gender", gender);
-        studentMap.put("Class", classStd);
+        studentMap.put("classStd", classStd);
         studentMap.put("Grade", grade);
         studentMap.put("Phone", phone);
         studentMap.put("StudentID", studId);
         studentMap.put("Email", email);
         studentMap.put("Password", "dummy");
-        teacherStudentRef.child("TeachersClass").child(teacherID).child("Students").child(studId).updateChildren(studentMap);
-        //studentsRef.child(studentID).updateChildren(studentMap);
+        teacherStudentRef.child("TeachersClass").child(teacherID).child("Students").child(studId).updateChildren(studentMap).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(ViewStudentsRequest.this);
+                bottomSheetDialog.setContentView(R.layout.add_success_student);
+                bottomSheetDialog.setCanceledOnTouchOutside(false);
+
+                studentIDText = bottomSheetDialog.findViewById(R.id.teacherId);
+                studentEmailText = bottomSheetDialog.findViewById(R.id.teacherEmailSA);
+
+                studentIDText.setText(studId);
+                studentEmailText.setText(email);
+
+                subject = "Welcome to AcaDroid! Activate your Account in 2 minutes.";
+                body = "Hi " + fname + " " + studId + " ,\n" +
+                        "Welcome to AcaDroid! We thank you for choosing us as your preferred partner for your " +
+                        "School Management. Your account is not activated yet and below are some important details\n" +
+                        "Your AcaDroid Login Credentials:\n" +
+                        "Here are your login ID " + ID + " for the AcaDroid platform.\n" +
+                        "Here are the steps how to generate password:\n" +
+                        "1. Go to AcaDroid App\n" +
+                        "2. Login as Student\n" +
+                        "3. Enter the ID provided by Superior\n" +
+                        "4. Click on Authenticate once you typed your ID\n" +
+                        "5. Create your password\n" +
+                        "6. All done!";
+
+                sendMailBtn = bottomSheetDialog.findViewById(R.id.sendMailBtn);
+                sendMailBtn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Uri uri = Uri.parse(email);
+                        Intent intent = new Intent(Intent.ACTION_SEND, uri);
+                        intent.setType("message/rfc822");
+                        intent.putExtra(Intent.EXTRA_EMAIL, new String[]{email});
+                        intent.putExtra(Intent.EXTRA_SUBJECT, subject);
+                        intent.putExtra(Intent.EXTRA_TEXT,body);
+                        startActivity(Intent.createChooser(intent,"Choose an email client"));
+                    }
+                });
+
+                bottomSheetDialog.show();
+            }
+        });;
+        studentsRef.child("AllStudents").child(studId).updateChildren(studentMap);
         removeStudRef.child("StudRequest").child(classStdGrade).child(studId).removeValue();
         Toast.makeText(getApplicationContext(), "Data Accepted", Toast.LENGTH_SHORT).show();
     }
@@ -226,8 +269,8 @@ public class ViewStudentsRequest extends AppCompatActivity {
         public DonorsViewHolder(@NonNull View itemView) {
             super(itemView);
             //mView = itemView;
-            /*acceptBtn = itemView.findViewById(R.id.studRqstAcceptBtn);
-            rejectBtn = itemView.findViewById(R.id.studRqstRejectBtn);*/
+            acceptBtn = itemView.findViewById(R.id.studRqstAcceptBtn);
+            rejectBtn = itemView.findViewById(R.id.studRqstRejectBtn);
         }
 
         public void setFirstName(String fname) {

@@ -181,11 +181,11 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/labsImg"
-                    android:gravity="center"
-                    android:textSize="17sp"
                     android:fontFamily="@font/lato"
+                    android:gravity="center"
+                    android:text="Laboratory"
                     android:textColor="@color/purple_700"
-                    android:text="Laboratory" />
+                    android:textSize="17sp" />
             </RelativeLayout>
         </androidx.cardview.widget.CardView>
 

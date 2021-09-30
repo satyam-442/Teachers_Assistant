@@ -7,6 +7,7 @@
     <string name="authenticate">Authenticate</string>
     <string name="addTeacher">Add Teacher</string>
     <string name="success_auth_message">Teacher added successfully. Above mentioned is Teacher ID mail them before it\'s too late and ask them to Authenticate and generate password</string>
+    <string name="success_auth_message_student">Student added successfully. Above mentioned is Student ID mail them before it\'s too late and ask them to Authenticate and generate password</string>
     <string name="pass_gen">New to AcaDroid. Initialize your password and get your account ready in one minute.</string>
     <string name="class_teacher_text">Select the Class and Division you handle as class teacher</string>
 
@@ -40,4 +41,6 @@
         <item>Mrs. Penelope Raasch</item>
         <item>Mrs. Suzi Greenland</item>
     </string-array>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

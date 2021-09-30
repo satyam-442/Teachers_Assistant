@@ -32,19 +32,18 @@ public class ViewStudent extends AppCompatActivity {
 
         viewStudentTV = bottomSheetDialog.findViewById(R.id.viewStudentTextView);
         viewStudent = findViewById(R.id.viewStudentImage);
-        viewStudent.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                viewStudentTV.setText("View Student");
-                bottomSheetDialog.show();
-            }
-        });
-
         viewStudentRqst = findViewById(R.id.viewStudentRequestImage);
     }
 
     public void goToViewRequest(View view) {
         Intent intent = new Intent(this,ViewStudentsRequest.class);
+        intent.putExtra("teacherID",teacherID);
+        intent.putExtra("classStd",classStd);
+        startActivity(intent);
+    }
+
+    public void goToViewStudent(View view) {
+        Intent intent = new Intent(this,ViewStudents.class);
         intent.putExtra("teacherID",teacherID);
         intent.putExtra("classStd",classStd);
         startActivity(intent);

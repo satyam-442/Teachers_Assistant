@@ -12,6 +12,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TeachersAssistant">
         <activity
+            android:name=".student.StudentMain"
+            android:exported="true" />
+        <activity
+            android:name=".teacher.ViewStudents"
+            android:exported="true" />
+        <activity
             android:name=".teacher.StudentsProfile"
             android:exported="true" />
         <activity
@@ -23,7 +29,7 @@
         <activity
             android:name=".teacher.TeacherMain"
             android:exported="true"
-            android:noHistory="true"/>
+            android:noHistory="true" />
         <activity
             android:name=".admin.ViewTeachers"
             android:exported="true" />

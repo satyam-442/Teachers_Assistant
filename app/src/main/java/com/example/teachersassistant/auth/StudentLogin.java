@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
@@ -21,12 +22,22 @@ import android.widget.Toast;
 import android.widget.ViewFlipper;
 
 import com.example.teachersassistant.R;
+import com.example.teachersassistant.admin.AdminMain;
+import com.example.teachersassistant.modal.AllStudents;
+import com.example.teachersassistant.modal.Teachers;
+import com.example.teachersassistant.modal.Users;
+import com.example.teachersassistant.prevalent.SessionManager;
+import com.example.teachersassistant.student.StudentMain;
+import com.example.teachersassistant.teacher.TeacherMain;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.textfield.TextInputLayout;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.HashMap;
 
@@ -36,11 +47,15 @@ public class StudentLogin extends AppCompatActivity{
 
     LinearLayout loginLO, registerLO, linLO;
     TextInputLayout studentFirstName, studentLastName, studentPhone, studentEmail, studentGender,studentClass, studentGrade, studentTeacherList;
+    TextInputLayout studentIDET,studentPasswordET;
+    TextInputLayout teacherPwd, bottomPwd;
     Spinner classSpinner, gradeSpinner, teacherSpinner;
     ViewFlipper v_flip;
     Button loginStdBtn, registerStdBtn;
     DatabaseReference classTeacherRef;
     ProgressDialog loadingBar;
+    Button generatePwd;
+    CheckBox rememberMeStudent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,8 +65,6 @@ public class StudentLogin extends AppCompatActivity{
         classTeacherRef = FirebaseDatabase.getInstance().getReference();
         loadingBar = new ProgressDialog(this);
 
-        Paper.init(this);
-
         //Image Slider
         int images[] = {R.drawable.one,R.drawable.two,R.drawable.three};
         v_flip = findViewById(R.id.v_flip);
@@ -59,6 +72,16 @@ public class StudentLogin extends AppCompatActivity{
         for (int image: images){
             flipperImages(image);
         }
+
+        SessionManager sessionManager = new SessionManager(StudentLogin.this, SessionManager.SESSION_REMEMBERME);
+        if (sessionManager.checkRememberMe()){
+            HashMap<String,String> rememberMeDetails = sessionManager.getRememberMeDetailsFromSession();
+            Intent intent = new Intent(StudentLogin.this,StudentMain.class);
+            intent.putExtra("teacherID",rememberMeDetails.get(SessionManager.KEY_SESSION_ID));
+            startActivity(intent);
+        }
+
+        rememberMeStudent = findViewById(R.id.rememberMeStudent);
 
         //SPINNER VALUE
         classSpinner = findViewById(R.id.class_spinner);
@@ -78,10 +101,94 @@ public class StudentLogin extends AppCompatActivity{
         studentGrade = findViewById(R.id.studentGradeLay);
         studentTeacherList = findViewById(R.id.studentTeacherLay);
 
+        studentIDET = findViewById(R.id.studentIDLay);
+        studentPasswordET = findViewById(R.id.studentPasswordLay);
+
         loginStdBtn = findViewById(R.id.loginStdBtn);
         loginStdBtn.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {}
+            public void onClick(View v) {
+                final String userid = studentIDET.getEditText().getText().toString();
+                final String password = studentPasswordET.getEditText().getText().toString();
+
+                if (TextUtils.isEmpty(userid)) {
+                    Toast.makeText(StudentLogin.this, "Field's are empty!", Toast.LENGTH_SHORT).show();
+                } else {
+                    loadingBar.setMessage("please wait...");
+                    loadingBar.setCanceledOnTouchOutside(false);
+                    loadingBar.show();
+
+                    final DatabaseReference rootRef;
+                    rootRef = FirebaseDatabase.getInstance().getReference();
+                    rootRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                            if (dataSnapshot.child("AllStudents").child(userid).exists()) {
+                                AllStudents teachersDate = dataSnapshot.child("AllStudents").child(userid).getValue(AllStudents.class);
+                                if (teachersDate.getStudentID().equals(userid)) {
+                                    if (teachersDate.getPassword().equals("dummy")) {
+                                        BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(StudentLogin.this);
+                                        bottomSheetDialog.setContentView(R.layout.bottom_sheet);
+                                        bottomSheetDialog.setCanceledOnTouchOutside(false);
+
+                                        //INITIALIZE YOUR VARIABLES
+                                        bottomPwd = bottomSheetDialog.findViewById(R.id.teacherPasswordLay);
+                                        generatePwd = bottomSheetDialog.findViewById(R.id.generatePwd);
+                                        generatePwd.setOnClickListener(new View.OnClickListener() {
+                                            @Override
+                                            public void onClick(View v) {
+                                                String password = bottomPwd.getEditText().getText().toString();
+                                                final DatabaseReference classPwdRef, studPwdRef;
+                                                //classPwdRef = FirebaseDatabase.getInstance().getReference().child("Teachers");
+                                                studPwdRef = FirebaseDatabase.getInstance().getReference().child("AllStudents");
+                                                HashMap<String, Object> pwdMap = new HashMap<String, Object>();
+                                                pwdMap.put("Password", password);
+                                                studPwdRef.child(userid).updateChildren(pwdMap).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                    @Override
+                                                    public void onComplete(@NonNull Task<Void> task) {
+                                                        Toast.makeText(StudentLogin.this, "Logged in as Student!", Toast.LENGTH_SHORT).show();
+                                                        if (rememberMeStudent.isChecked()) {
+                                                            SessionManager sessionManager = new SessionManager(StudentLogin.this, SessionManager.SESSION_REMEMBERME);
+                                                            sessionManager.createRememberMeSession(userid, password);
+                                                        }
+                                                        Intent intent = new Intent(StudentLogin.this, StudentMain.class);
+                                                        intent.putExtra("studID", userid);
+                                                        startActivity(intent);
+                                                        loadingBar.dismiss();
+                                                    }
+                                                });
+                                            }
+                                        });
+                                        bottomSheetDialog.show();
+                                    } else {
+                                        studentPasswordET.setVisibility(View.VISIBLE);
+                                        rememberMeStudent.setVisibility(View.VISIBLE);
+                                        loadingBar.dismiss();
+                                        if (teachersDate.getPassword().equals(password)) {
+                                            Toast.makeText(StudentLogin.this, "Logged in as Student!", Toast.LENGTH_SHORT).show();
+                                            if (rememberMeStudent.isChecked()) {
+                                                SessionManager sessionManager = new SessionManager(StudentLogin.this, SessionManager.SESSION_REMEMBERME);
+                                                sessionManager.createRememberMeSession(userid, password);
+                                            }
+                                            Intent intent = new Intent(StudentLogin.this, StudentMain.class);
+                                            intent.putExtra("studID", userid);
+                                            startActivity(intent);
+                                            loadingBar.dismiss();
+                                        }
+                                    }
+                                }
+                            } else {
+                                Toast.makeText(StudentLogin.this, "No record found!", Toast.LENGTH_SHORT).show();
+                                loadingBar.dismiss();
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError databaseError) {
+                        }
+                    });
+                }
+            }
         });
 
         registerStdBtn = findViewById(R.id.registerStdBtn);
@@ -153,12 +260,6 @@ public class StudentLogin extends AppCompatActivity{
         teacherSpinner.setOnItemSelectedListener(new TeacherStudentList());
     }
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-        Paper.book().destroy();
-    }
-
     private void Alert(String msg){
         AlertDialog dialog = new AlertDialog.Builder(this)
                 .setTitle("Acknowledge")
@@ -166,10 +267,17 @@ public class StudentLogin extends AppCompatActivity{
                 .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                        Intent intent = new Intent(getApplicationContext(), StudentLogin.class);
+                        studentFirstName.getEditText().getText().clear();
+                        studentLastName.getEditText().getText().clear();
+                        studentPhone.getEditText().getText().clear();
+                        studentEmail.getEditText().getText().clear();
+                        studentGender.getEditText().getText().clear();
+                        studentClass.getEditText().getText().clear();;
+                        studentGrade.getEditText().getText().clear();
+                        dialog.cancel();
+                        /*Intent intent = new Intent(getApplicationContext(), StudentLogin.class);
                         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                        startActivity(intent);
+                        startActivity(intent);*/
                     }
                 })
                 .create();

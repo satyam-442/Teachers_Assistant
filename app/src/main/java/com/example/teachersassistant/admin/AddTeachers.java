@@ -112,9 +112,7 @@ public class AddTeachers extends AppCompatActivity {
                         teacherRef.child("Teachers").child("ClassTeacher").child(teacherId).updateChildren(teacherMap).addOnCompleteListener(new OnCompleteListener<Void>() {
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {
-                            /*if (classTeach.equals("T")){
-
-                            }*/
+                                /*if (classTeach.equals("T")){}*/
                                 if (task.isSuccessful()){
                                     Intent intent = new Intent(getApplicationContext(), SuccessAddPage.class);
                                     intent.putExtra("ID", teacherId);

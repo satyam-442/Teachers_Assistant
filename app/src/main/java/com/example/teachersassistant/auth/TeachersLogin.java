@@ -87,11 +87,6 @@ public class TeachersLogin extends AppCompatActivity {
                 final String userid = teacherId.getEditText().getText().toString();
                 final String password = teacherPwd.getEditText().getText().toString();
 
-                /*if (rememberMe.isChecked()){
-                    Paper.book().write(Prevalent.UserTeacherIDKey, userid);
-                    Paper.book().write(Prevalent.UserPasswordKey, password);
-                }*/
-
                 if (TextUtils.isEmpty(userid)) {
                     Toast.makeText(TeachersLogin.this, "Field's are empty!", Toast.LENGTH_SHORT).show();
                 } else {
