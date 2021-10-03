@@ -56,6 +56,7 @@ public class StudentLogin extends AppCompatActivity{
     ProgressDialog loadingBar;
     Button generatePwd;
     CheckBox rememberMeStudent;
+    String loginType = "student";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -138,7 +139,7 @@ public class StudentLogin extends AppCompatActivity{
                                             @Override
                                             public void onClick(View v) {
                                                 String password = bottomPwd.getEditText().getText().toString();
-                                                final DatabaseReference classPwdRef, studPwdRef;
+                                                final DatabaseReference classTeacherStudsPwdRef, studPwdRef;
                                                 //classPwdRef = FirebaseDatabase.getInstance().getReference().child("Teachers");
                                                 studPwdRef = FirebaseDatabase.getInstance().getReference().child("AllStudents");
                                                 HashMap<String, Object> pwdMap = new HashMap<String, Object>();
@@ -149,7 +150,7 @@ public class StudentLogin extends AppCompatActivity{
                                                         Toast.makeText(StudentLogin.this, "Logged in as Student!", Toast.LENGTH_SHORT).show();
                                                         if (rememberMeStudent.isChecked()) {
                                                             SessionManager sessionManager = new SessionManager(StudentLogin.this, SessionManager.SESSION_REMEMBERME);
-                                                            sessionManager.createRememberMeSession(userid, password);
+                                                            sessionManager.createRememberMeSession(userid, password,loginType);
                                                         }
                                                         Intent intent = new Intent(StudentLogin.this, StudentMain.class);
                                                         intent.putExtra("studID", userid);
@@ -168,7 +169,7 @@ public class StudentLogin extends AppCompatActivity{
                                             Toast.makeText(StudentLogin.this, "Logged in as Student!", Toast.LENGTH_SHORT).show();
                                             if (rememberMeStudent.isChecked()) {
                                                 SessionManager sessionManager = new SessionManager(StudentLogin.this, SessionManager.SESSION_REMEMBERME);
-                                                sessionManager.createRememberMeSession(userid, password);
+                                                sessionManager.createRememberMeSession(userid, password, loginType);
                                             }
                                             Intent intent = new Intent(StudentLogin.this, StudentMain.class);
                                             intent.putExtra("studID", userid);

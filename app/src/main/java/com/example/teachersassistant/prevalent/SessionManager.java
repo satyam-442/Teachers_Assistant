@@ -15,6 +15,7 @@ public class SessionManager {
     private static final String IS_LOGIN = "IsLoggedIn";
 
     private static final String IS_REMEMBERME = "IsRememberMe";
+    public static final String KEY_LOGIN_TYPE = "type";
     public static final String KEY_SESSION_ID = "userId";
     public static final String KEY_SESSION_PWD = "password";
 
@@ -29,10 +30,11 @@ public class SessionManager {
         editor.commit();
     }
 
-    public void createRememberMeSession(String userID, String password){
+    public void createRememberMeSession(String userID, String password, String typeEntity){
         editor.putBoolean(IS_REMEMBERME,true);
         editor.putString(KEY_SESSION_ID,userID);
         editor.putString(KEY_SESSION_PWD,password);
+        editor.putString(KEY_LOGIN_TYPE,typeEntity);
         editor.commit();
     }
 
@@ -40,7 +42,7 @@ public class SessionManager {
         HashMap<String, String> userData = new HashMap<>();
         userData.put(KEY_SESSION_ID, usersSession.getString(KEY_SESSION_ID,null));
         userData.put(KEY_SESSION_PWD, usersSession.getString(KEY_SESSION_PWD,null));
-
+        userData.put(KEY_LOGIN_TYPE, usersSession.getString(KEY_LOGIN_TYPE,null));
         return userData;
     }
 

@@ -107,6 +107,7 @@ public class AddTeachers extends AppCompatActivity {
                         teacherMap.put("Password",password);
                         teacherMap.put("classTeacher",classTeach);
                         teacherMap.put("subjectTeacher",subjTeach);
+                        teacherMap.put("subjectUpdated","NO");
                         teacherMap.put("image","default");
                         teacherMap.put("teacherID",teacherId);
                         teacherRef.child("Teachers").child("ClassTeacher").child(teacherId).updateChildren(teacherMap).addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -129,12 +130,7 @@ public class AddTeachers extends AppCompatActivity {
                             }
                         });
                         teacherRef.child("Teachers").child("SubjectTeacher").child(teacherId).updateChildren(teacherMap);
-
-                        //ALL TEACHER LIST
-                        HashMap<String, Object> allTeacherMap = new HashMap<String, Object>();
-                        allTeacherMap.put("Name",fullname);
-                        allTeacherMap.put("teacherID",teacherId);
-                        allTeacherList.child(teacherId).updateChildren(allTeacherMap);
+                        allTeacherList.child(teacherId).updateChildren(teacherMap);
                     }
                 }
                 else if(subjTeacher.getText().toString().equals("T")){
@@ -171,6 +167,7 @@ public class AddTeachers extends AppCompatActivity {
                         teacherMap.put("Password",password);
                         teacherMap.put("classTeacher",classTeach);
                         teacherMap.put("subjectTeacher",subjTeach);
+                        teacherMap.put("subjectUpdated","NO");
                         teacherMap.put("image","default");
                         teacherMap.put("teacherID",teacherId);
                         teacherRef.child("Teachers").child("SubjectTeacher").child(teacherId).updateChildren(teacherMap).addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -194,11 +191,7 @@ public class AddTeachers extends AppCompatActivity {
                                 }
                             }
                         });
-                        //ALL TEACHER LIST
-                        HashMap<String, Object> allTeacherMap = new HashMap<String, Object>();
-                        allTeacherMap.put("Name",fullname);
-                        allTeacherMap.put("teacherID",teacherId);
-                        allTeacherList.child(teacherId).updateChildren(allTeacherMap);
+                        allTeacherList.child(teacherId).updateChildren(teacherMap);
                     }
                 }
                 else {
@@ -235,6 +228,7 @@ public class AddTeachers extends AppCompatActivity {
                         teacherMap.put("Password",password);
                         teacherMap.put("classTeacher",classTeach);
                         teacherMap.put("subjectTeacher",subjTeach);
+                        teacherMap.put("subjectUpdated","NO");
                         teacherMap.put("image","default");
                         teacherMap.put("teacherID",teacherId);
                         teacherRef.child("Teachers").child("SubjectTeacher").child(teacherId).updateChildren(teacherMap).addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -258,12 +252,7 @@ public class AddTeachers extends AppCompatActivity {
                                 }
                             }
                         });
-
-                        //ALL TEACHER LIST
-                        HashMap<String, Object> allTeacherMap = new HashMap<String, Object>();
-                        allTeacherMap.put("Name",fullname);
-                        allTeacherMap.put("teacherID",teacherId);
-                        allTeacherList.child(teacherId).updateChildren(allTeacherMap);
+                        allTeacherList.child(teacherId).updateChildren(teacherMap);
                     }
                 }
             }

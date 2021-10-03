@@ -31,13 +31,15 @@
         app:hintEnabled="true"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         app:errorEnabled="true"
-        android:layout_marginTop="25dp">
+        android:layout_marginTop="25dp"
+        app:passwordToggleEnabled="true">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/teacherId"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Create new Password"/>
+            android:hint="Create new Password"
+            android:inputType="textPassword"/>
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button

@@ -25,4 +25,9 @@ public class AdminMain extends AppCompatActivity {
         Intent intent = new Intent(this,ViewTeachers.class);
         startActivity(intent);
     }
+
+    public void addLaboratory(View view) {
+        Intent intent = new Intent(this,AddLaboratoryActivity.class);
+        startActivity(intent);
+    }
 }

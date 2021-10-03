@@ -25,6 +25,7 @@ import com.example.teachersassistant.auth.StudentLogin;
 import com.example.teachersassistant.auth.TeachersLogin;
 import com.example.teachersassistant.modal.Teachers;
 import com.example.teachersassistant.prevalent.Prevalent;
+import com.example.teachersassistant.prevalent.SessionManager;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
@@ -45,7 +46,7 @@ public class TeacherMain extends AppCompatActivity {
     ImageView logout;
     DatabaseReference teacherRef;
     ProgressDialog loadingBar;
-    TextView mainClassStd;
+    TextView mainClass,mainStd, mainName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,12 +55,15 @@ public class TeacherMain extends AppCompatActivity {
 
         //Paper.init(this);
         loadingBar = new ProgressDialog(this);
-        mainClassStd = findViewById(R.id.teacherMainClassStd);
+        mainClass = findViewById(R.id.teacherMainClass);
+        mainStd = findViewById(R.id.teacherMainStd);
+        mainName = findViewById(R.id.teacherMainName);
 
         teacherID = getIntent().getExtras().get("teacherID").toString();
 
         loadingBar.setMessage("please wait...");
         loadingBar.setCanceledOnTouchOutside(false);
+        loadingBar.getWindow().setElevation(15);
         loadingBar.show();
         teacherRef = FirebaseDatabase.getInstance().getReference();
         teacherRef.child("Teachers").child("ClassTeacher").child(teacherID).addValueEventListener(new ValueEventListener() {
@@ -68,8 +72,10 @@ public class TeacherMain extends AppCompatActivity {
                 if (snapshot.exists()) {
                     String classStd = snapshot.child("Class").getValue().toString();
                     String grade = snapshot.child("Grade").getValue().toString();
-                    String classGrade = classStd + grade;
-                    mainClassStd.setText(classGrade);
+                    String name = snapshot.child("FirstName").getValue().toString();
+                    mainClass.setText(classStd);
+                    mainStd.setText(grade);
+                    mainName.setText(name);
                     loadingBar.dismiss();
                 }
             }
@@ -80,14 +86,16 @@ public class TeacherMain extends AppCompatActivity {
         });
 
         logout = findViewById(R.id.logout);
-        /*logout.setOnClickListener(new View.OnClickListener() {
+        logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Paper.book().destroy();
+                SessionManager sessionManager = new SessionManager(TeacherMain.this, SessionManager.SESSION_REMEMBERME);
+                sessionManager.logoutUserFromSession();
                 Intent intent = new Intent(TeacherMain.this, WelcomeScreen.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intent);
             }
-        });*/
+        });
     }
 
     @Override
@@ -107,9 +115,17 @@ public class TeacherMain extends AppCompatActivity {
     }
 
     public void goToStudent(View view) {
+        String classStd = mainClass.getText().toString() + mainStd.getText().toString();
         Intent intent = new Intent(this, ViewStudent.class);
         intent.putExtra("teacherID", teacherID);
-        intent.putExtra("classStd", mainClassStd.getText().toString());
+        intent.putExtra("classStd", classStd);
+        startActivity(intent);
+    }
+
+    public void goToLab(View view) {
+        Intent intent = new Intent(this, TeacherViewLabActivity.class);
+        intent.putExtra("teacherID", teacherID);
+        intent.putExtra("teacherName", mainName.getText().toString());
         startActivity(intent);
     }
 }

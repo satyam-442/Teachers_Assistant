@@ -1,12 +1,12 @@
 package com.example.teachersassistant.modal;
 
 public class Teachers {
-    String Email, Gender, FirstName, LastName, Password, Phone, classTeacher, image, subjectTeacher, teacherID;
+    String Email, Gender, FirstName, LastName, Password, Phone, classTeacher, image, subjectTeacher,subjectUpdated, teacherID;
 
     public Teachers() {
     }
 
-    public Teachers(String email, String gender, String firstName, String lastName, String password, String phone, String classTeacher, String image, String subjectTeacher, String teacherID) {
+    public Teachers(String email, String gender, String firstName, String lastName, String password, String phone, String classTeacher, String image, String subjectTeacher, String subjectUpdated, String teacherID) {
         Email = email;
         Gender = gender;
         FirstName = firstName;
@@ -16,6 +16,7 @@ public class Teachers {
         this.classTeacher = classTeacher;
         this.image = image;
         this.subjectTeacher = subjectTeacher;
+        this.subjectUpdated = subjectUpdated;
         this.teacherID = teacherID;
     }
 
@@ -89,6 +90,14 @@ public class Teachers {
 
     public void setSubjectTeacher(String subjectTeacher) {
         this.subjectTeacher = subjectTeacher;
+    }
+
+    public String getSubjectUpdated() {
+        return subjectUpdated;
+    }
+
+    public void setSubjectUpdated(String subjectUpdated) {
+        this.subjectUpdated = subjectUpdated;
     }
 
     public String getTeacherID() {

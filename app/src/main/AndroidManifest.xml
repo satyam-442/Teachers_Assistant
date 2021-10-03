@@ -12,6 +12,15 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TeachersAssistant">
         <activity
+            android:name=".teacher.LabProfileActivity"
+            android:exported="true" />
+        <activity
+            android:name=".teacher.TeacherViewLabActivity"
+            android:exported="true" />
+        <activity
+            android:name=".admin.AddLaboratoryActivity"
+            android:exported="true" />
+        <activity
             android:name=".student.StudentMain"
             android:exported="true" />
         <activity

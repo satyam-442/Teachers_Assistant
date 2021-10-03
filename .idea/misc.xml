@@ -5,19 +5,25 @@
       <map>
         <entry key="..\:/SATYAM/FlutterProjectLeraning/TeachersAssistant/app/src/main/res/drawable/accept_btn.xml" value="0.19444444444444445" />
         <entry key="..\:/SATYAM/FlutterProjectLeraning/TeachersAssistant/app/src/main/res/drawable/cell_shape.xml" value="0.2037037037037037" />
+        <entry key="..\:/SATYAM/FlutterProjectLeraning/TeachersAssistant/app/src/main/res/drawable/drawer_menu.xml" value="0.19907407407407407" />
         <entry key="..\:/SATYAM/FlutterProjectLeraning/TeachersAssistant/app/src/main/res/drawable/gradient_spinner.xml" value="0.20555555555555555" />
         <entry key="..\:/SATYAM/FlutterProjectLeraning/TeachersAssistant/app/src/main/res/drawable/reject_btn.xml" value="0.19444444444444445" />
         <entry key="..\:/SATYAM/FlutterProjectLeraning/TeachersAssistant/app/src/main/res/drawable/spinner_bg.xml" value="0.20555555555555555" />
+        <entry key="..\:/SATYAM/FlutterProjectLeraning/TeachersAssistant/app/src/main/res/drawable/thumb.xml" value="0.24166666666666667" />
+        <entry key="..\:/SATYAM/FlutterProjectLeraning/TeachersAssistant/app/src/main/res/drawable/track.xml" value="0.24166666666666667" />
+        <entry key="..\:/SATYAM/FlutterProjectLeraning/TeachersAssistant/app/src/main/res/layout/activity_add_laboratory.xml" value="0.21197916666666666" />
         <entry key="..\:/SATYAM/FlutterProjectLeraning/TeachersAssistant/app/src/main/res/layout/activity_add_teachers.xml" value="0.17" />
         <entry key="..\:/SATYAM/FlutterProjectLeraning/TeachersAssistant/app/src/main/res/layout/activity_admin_main.xml" value="0.2" />
         <entry key="..\:/SATYAM/FlutterProjectLeraning/TeachersAssistant/app/src/main/res/layout/activity_class.xml" value="0.22447916666666667" />
+        <entry key="..\:/SATYAM/FlutterProjectLeraning/TeachersAssistant/app/src/main/res/layout/activity_lab_profile.xml" value="0.22552083333333334" />
         <entry key="..\:/SATYAM/FlutterProjectLeraning/TeachersAssistant/app/src/main/res/layout/activity_main.xml" value="0.22447916666666667" />
         <entry key="..\:/SATYAM/FlutterProjectLeraning/TeachersAssistant/app/src/main/res/layout/activity_student_login.xml" value="0.2" />
         <entry key="..\:/SATYAM/FlutterProjectLeraning/TeachersAssistant/app/src/main/res/layout/activity_student_main.xml" value="0.2" />
         <entry key="..\:/SATYAM/FlutterProjectLeraning/TeachersAssistant/app/src/main/res/layout/activity_student_success_page.xml" value="0.2" />
         <entry key="..\:/SATYAM/FlutterProjectLeraning/TeachersAssistant/app/src/main/res/layout/activity_students_profile.xml" value="0.18" />
         <entry key="..\:/SATYAM/FlutterProjectLeraning/TeachersAssistant/app/src/main/res/layout/activity_success_add_page.xml" value="0.2" />
-        <entry key="..\:/SATYAM/FlutterProjectLeraning/TeachersAssistant/app/src/main/res/layout/activity_teacher_main.xml" value="0.2" />
+        <entry key="..\:/SATYAM/FlutterProjectLeraning/TeachersAssistant/app/src/main/res/layout/activity_teacher_main.xml" value="0.25" />
+        <entry key="..\:/SATYAM/FlutterProjectLeraning/TeachersAssistant/app/src/main/res/layout/activity_teacher_view_lab.xml" value="0.22552083333333334" />
         <entry key="..\:/SATYAM/FlutterProjectLeraning/TeachersAssistant/app/src/main/res/layout/activity_teachers_login.xml" value="0.2" />
         <entry key="..\:/SATYAM/FlutterProjectLeraning/TeachersAssistant/app/src/main/res/layout/activity_view_student.xml" value="0.2" />
         <entry key="..\:/SATYAM/FlutterProjectLeraning/TeachersAssistant/app/src/main/res/layout/activity_view_students.xml" value="0.22552083333333334" />
@@ -25,6 +31,7 @@
         <entry key="..\:/SATYAM/FlutterProjectLeraning/TeachersAssistant/app/src/main/res/layout/activity_view_teachers.xml" value="0.22" />
         <entry key="..\:/SATYAM/FlutterProjectLeraning/TeachersAssistant/app/src/main/res/layout/activity_welcome_screen.xml" value="0.21041666666666667" />
         <entry key="..\:/SATYAM/FlutterProjectLeraning/TeachersAssistant/app/src/main/res/layout/add_success_student.xml" value="0.22552083333333334" />
+        <entry key="..\:/SATYAM/FlutterProjectLeraning/TeachersAssistant/app/src/main/res/layout/all_lab_view.xml" value="0.25" />
         <entry key="..\:/SATYAM/FlutterProjectLeraning/TeachersAssistant/app/src/main/res/layout/all_student_request.xml" value="0.33" />
         <entry key="..\:/SATYAM/FlutterProjectLeraning/TeachersAssistant/app/src/main/res/layout/all_student_view.xml" value="0.22552083333333334" />
         <entry key="..\:/SATYAM/FlutterProjectLeraning/TeachersAssistant/app/src/main/res/layout/all_students.xml" value="0.22" />
@@ -34,9 +41,17 @@
         <entry key="..\:/SATYAM/FlutterProjectLeraning/TeachersAssistant/app/src/main/res/layout/bottom_sheet_students.xml" value="0.22552083333333334" />
         <entry key="..\:/SATYAM/FlutterProjectLeraning/TeachersAssistant/app/src/main/res/layout/bottom_sheet_table.xml" value="0.18" />
         <entry key="..\:/SATYAM/FlutterProjectLeraning/TeachersAssistant/app/src/main/res/layout/demo.xml" value="0.22447916666666667" />
+        <entry key="..\:/SATYAM/FlutterProjectLeraning/TeachersAssistant/app/src/main/res/layout/drawer_menu.xml" value="0.22552083333333334" />
+        <entry key="..\:/SATYAM/FlutterProjectLeraning/TeachersAssistant/app/src/main/res/layout/fragment_about_us.xml" value="0.22552083333333334" />
+        <entry key="..\:/SATYAM/FlutterProjectLeraning/TeachersAssistant/app/src/main/res/layout/fragment_assignmentt.xml" value="0.22552083333333334" />
+        <entry key="..\:/SATYAM/FlutterProjectLeraning/TeachersAssistant/app/src/main/res/layout/fragment_notice.xml" value="0.22552083333333334" />
+        <entry key="..\:/SATYAM/FlutterProjectLeraning/TeachersAssistant/app/src/main/res/layout/fragment_result.xml" value="0.22552083333333334" />
         <entry key="..\:/SATYAM/FlutterProjectLeraning/TeachersAssistant/app/src/main/res/layout/fragment_student_main.xml" value="0.22552083333333334" />
         <entry key="..\:/SATYAM/FlutterProjectLeraning/TeachersAssistant/app/src/main/res/layout/fragment_time_table.xml" value="0.21197916666666666" />
+        <entry key="..\:/SATYAM/FlutterProjectLeraning/TeachersAssistant/app/src/main/res/layout/header.xml" value="0.22" />
         <entry key="..\:/SATYAM/FlutterProjectLeraning/TeachersAssistant/app/src/main/res/layout/image_slider_layout_item.xml" value="0.22447916666666667" />
+        <entry key="..\:/SATYAM/FlutterProjectLeraning/TeachersAssistant/app/src/main/res/layout/item_option.xml" value="0.22552083333333334" />
+        <entry key="..\:/SATYAM/FlutterProjectLeraning/TeachersAssistant/app/src/main/res/menu/main_menu.xml" value="0.22552083333333334" />
       </map>
     </option>
   </component>

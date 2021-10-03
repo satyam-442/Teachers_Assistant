@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="id_activity_screen_titles">
+        <item>Home</item>
+        <item>Assignment</item>
+        <item>Time Table</item>
+        <item>Result</item>
+        <item>Notice</item>
+        <item>About Us</item>
+        <item/>
+        <item>Logout</item>
+    </string-array>
+
+    <string-array name="id_activity_screen_icons">
+        <item>@drawable/close</item>
+        <item>@drawable/home</item>
+        <item>@drawable/assignmentxml</item>
+        <item>@drawable/timetablexml</item>
+        <item>@drawable/resultxml</item>
+        <item>@drawable/notice</item>
+        <item>@drawable/aboutus</item>
+        <item>0</item>
+        <item>@drawable/logout</item>
+    </string-array>
+></resources>

@@ -18,31 +18,68 @@
         app:navigationIcon="@drawable/menu" />
 
     <TextView
-        android:id="@+id/greetings"
+        android:id="@+id/greetingsOne"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
         android:layout_marginTop="24dp"
         android:fontFamily="@font/lato"
-        android:text="Welcome to class"
-        android:padding="5dp"
+        android:text="Hello "
         android:textSize="30sp"
         android:textColor="@color/purple_700"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar" />
 
     <TextView
-        android:id="@+id/teacherMainClassStd"
+        android:id="@+id/teacherMainName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
         android:fontFamily="@font/lato"
-        android:padding="5dp"
         android:text=""
         android:textColor="@color/purple_700"
         android:textSize="30sp"
-        app:layout_constraintStart_toEndOf="@id/greetings"
+        app:layout_constraintStart_toEndOf="@id/greetingsOne"
         app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+
+    <TextView
+        android:id="@+id/greetings"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/lato"
+        android:text="Welcome to "
+        android:textSize="24sp"
+        android:textColor="@color/purple_700"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/greetingsOne" />
+
+    <TextView
+        android:id="@+id/teacherMainClass"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/lato"
+        android:text=""
+        android:textColor="@color/purple_700"
+        android:textSize="24sp"
+        app:layout_constraintStart_toEndOf="@id/greetings"
+        app:layout_constraintTop_toBottomOf="@+id/greetingsOne"
+        android:paddingEnd="2dp"/>
+
+    <TextView
+        android:id="@+id/teacherMainStd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/lato"
+        android:text=""
+        android:textColor="@color/purple_700"
+        android:textSize="24sp"
+        app:layout_constraintStart_toEndOf="@id/teacherMainClass"
+        app:layout_constraintTop_toBottomOf="@+id/greetingsOne"
+        android:paddingStart="2dp"/>
 
     <TextView
         android:id="@+id/textView7"
@@ -175,7 +212,8 @@
                     android:layout_alignParentEnd="true"
                     android:layout_marginStart="15dp"
                     android:layout_marginEnd="15dp"
-                    android:src="@drawable/comp_lab" />
+                    android:src="@drawable/comp_lab"
+                    android:onClick="goToLab"/>
 
                 <TextView
                     android:layout_width="match_parent"

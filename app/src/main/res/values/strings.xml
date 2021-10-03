@@ -12,17 +12,20 @@
     <string name="class_teacher_text">Select the Class and Division you handle as class teacher</string>
 
     <string-array name="class_array">
-        <item>1</item>
-        <item>2</item>
-        <item>3</item>
-        <item>4</item>
-        <item>5</item>
+        <item>BFA</item>
+        <item>BCom</item>
+        <item>BFM</item>
+        <item>BscIT</item>
+        <item>BSci</item>
     </string-array>
 
     <string-array name="grade_array">
-        <item>A</item>
-        <item>B</item>
-        <item>C</item>
+        <item>I-Sem</item>
+        <item>II-Sem</item>
+        <item>III-Sem</item>
+        <item>IV-Sem</item>
+        <item>V-Sem</item>
+        <item>VI-Sem</item>
     </string-array>
 
     <string-array name="teacher_array">
@@ -43,4 +46,6 @@
     </string-array>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="navigation_drawer_open">Open Navigation Drawer</string>
+    <string name="navigation_drawer_close">Close Navigation Drawer</string>
 </resources>

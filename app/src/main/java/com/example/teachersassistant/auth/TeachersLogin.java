@@ -41,9 +41,10 @@ public class TeachersLogin extends AppCompatActivity {
 
     TextInputLayout teacherId, teacherPwd, bottomPwd;
     FirebaseAuth mAuth;
-    DatabaseReference teacherRef;
+    DatabaseReference teacherRef, allTeachersRef;
     Button authenticate, generatePwd;
     String parentDBName = "admin";
+    String loginType = "teacher";
     ProgressDialog loadingBar;
     CheckBox rememberMe;
 
@@ -54,6 +55,7 @@ public class TeachersLogin extends AppCompatActivity {
 
         mAuth = FirebaseAuth.getInstance();
         teacherRef = FirebaseDatabase.getInstance().getReference().child("admin");
+        allTeachersRef = FirebaseDatabase.getInstance().getReference();
 
         loadingBar = new ProgressDialog(this);
 
@@ -109,8 +111,8 @@ public class TeachersLogin extends AppCompatActivity {
                                         loadingBar.dismiss();
                                     }
                                 }
-                            } else if (dataSnapshot.child("Teachers").child("ClassTeacher").child(userid).exists()) {
-                                Teachers teachersDate = dataSnapshot.child("Teachers").child("ClassTeacher").child(userid).getValue(Teachers.class);
+                            } else if (dataSnapshot.child("AllTeachers").child(userid).exists()) {
+                                Teachers teachersDate = dataSnapshot.child("AllTeachers").child(userid).getValue(Teachers.class);
                                 if (teachersDate.getTeacherID().equals(userid)) {
                                     if (teachersDate.getPassword().equals("dummy")) {
                                         BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(TeachersLogin.this);
@@ -135,7 +137,7 @@ public class TeachersLogin extends AppCompatActivity {
                                                         Toast.makeText(TeachersLogin.this, "Logged in as Teacher!", Toast.LENGTH_SHORT).show();
                                                         if (rememberMe.isChecked()) {
                                                             SessionManager sessionManager = new SessionManager(TeachersLogin.this, SessionManager.SESSION_REMEMBERME);
-                                                            sessionManager.createRememberMeSession(userid, password);
+                                                            sessionManager.createRememberMeSession(userid, password,loginType);
                                                         }
                                                         Intent intent = new Intent(TeachersLogin.this, TeacherMain.class);
                                                         intent.putExtra("teacherID", userid);
@@ -144,6 +146,7 @@ public class TeachersLogin extends AppCompatActivity {
                                                     }
                                                 });
                                                 subjPwdRef.child("SubjectTeacher").child(userid).updateChildren(pwdMap);
+                                                allTeachersRef.child("AllTeachers").child(userid).updateChildren(pwdMap);
                                             }
                                         });
 
@@ -156,7 +159,7 @@ public class TeachersLogin extends AppCompatActivity {
                                             Toast.makeText(TeachersLogin.this, "Logged in as teacher!", Toast.LENGTH_SHORT).show();
                                             if (rememberMe.isChecked()) {
                                                 SessionManager sessionManager = new SessionManager(TeachersLogin.this, SessionManager.SESSION_REMEMBERME);
-                                                sessionManager.createRememberMeSession(userid, password);
+                                                sessionManager.createRememberMeSession(userid, password,loginType);
                                             }
                                             Intent intent = new Intent(TeachersLogin.this, TeacherMain.class);
                                             intent.putExtra("teacherID", userid);
@@ -170,16 +173,13 @@ public class TeachersLogin extends AppCompatActivity {
                                 loadingBar.dismiss();
                             }
                         }
-
                         @Override
                         public void onCancelled(@NonNull DatabaseError databaseError) {
                         }
                     });
                 }
-
             }
         });
-
     }
 
     /*private void AllowTeacherToLogin(String userTeacherIDKey, String userPasswordKey) {
@@ -205,12 +205,8 @@ public class TeachersLogin extends AppCompatActivity {
                     }
                 }
             }
-
             @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
+            public void onCancelled(@NonNull DatabaseError error) {}
         });
     }*/
-
 }
